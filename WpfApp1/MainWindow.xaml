@@ -3,27 +3,49 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="225" Width="288.5">
-    <Grid>
+        Title="Login" Height="550" Width="500"
+		WindowStyle="None"
+		ResizeMode="NoResize"
+		WindowStartupLocation="CenterScreen"
+		Background="Transparent"
+		AllowsTransparency="True"
+		MouseDown="Window_MouseDown">
 
-        <StackPanel>
+    <Border CornerRadius="50"
+			BorderThickness="5">
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#26008f" Offset="0.0" />
+                <GradientStop Color="#6c008f" Offset="1.0" />
+            </LinearGradientBrush>
+        </Border.BorderBrush>
 
-            <TextBlock Text="LOGIN PAGE"
-                       HorizontalAlignment="Center"
-                       FontSize="40"/>
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#360147" Offset="0.0" />
+                <GradientStop Color="#011636" Offset="1.0" />
+            </LinearGradientBrush>
+        </Border.Background>
 
-            <TextBlock Text="Username" HorizontalAlignment="Center"/>
-            <TextBox x:Name="txtUser"/>
+        <Grid>
 
-            <TextBlock Text="Password" HorizontalAlignment="Center"/>
-            <TextBox x:Name="txtPass"/>
 
-            <Button x:Name="btnLogin"
-                    Content="Pieslēgties"
-                    Click="btnconnect"/>
-        </StackPanel>
 
-    </Grid>
+            <Image Source="/Images/Logo.png" Width="300" Height="Auto" Margin="100,50,100,337" />
+
+            <TextBlock HorizontalAlignment="Left" Height="19" Margin="139,187,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Width="200" Foreground="white" TextAlignment="Center" FontSize="14"/>
+            <TextBox x:Name="txtUser" HorizontalAlignment="Left" Height="23" Margin="139,205,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
+
+                <TextBlock HorizontalAlignment="Left" Height="19" Margin="139,254,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="200" Foreground="white" TextAlignment="Center" FontSize="14"/>
+                <TextBox x:Name="txtPass" HorizontalAlignment="Left" Height="23" Margin="139,273,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
+
+                <Button x:Name="btnLogin" Click="btnconnect" Content="Pieslēgties" HorizontalAlignment="Left" Margin="191,317,0,0" VerticalAlignment="Top" Width="100"/>
+
+        </Grid>
+
+    </Border>
+
 </Window>
