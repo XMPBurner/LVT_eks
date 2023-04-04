@@ -32,10 +32,32 @@ namespace WpfApp1
             if (e.LeftButton == MouseButtonState.Pressed)
                 DragMove();
         }
+        private void Min(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void Close(object sender, System.EventArgs e)
+        {
+            Close();
+        }
 
         string connstring = @"server=localhost;userid=Porikis;password=admin;database=Porikis;port=3306";
 
-        private void btnconnect(object sender, EventArgs e)
+        private void KeyLogin(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                Login();
+            }
+        }
+
+        private void BtnLogin(object sender, RoutedEventArgs e)
+        {
+            Login();
+        }
+
+        private void Login()
         {
             MySqlConnection cnn;
             cnn = new MySqlConnection(connstring);

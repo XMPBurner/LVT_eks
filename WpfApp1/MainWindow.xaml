@@ -39,10 +39,13 @@
             <TextBlock HorizontalAlignment="Left" Height="19" Margin="139,187,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Width="200" Foreground="white" TextAlignment="Center" FontSize="14"/>
             <TextBox x:Name="txtUser" HorizontalAlignment="Left" Height="23" Margin="139,205,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
 
-                <TextBlock HorizontalAlignment="Left" Height="19" Margin="139,254,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="200" Foreground="white" TextAlignment="Center" FontSize="14"/>
-                <TextBox x:Name="txtPass" HorizontalAlignment="Left" Height="23" Margin="139,273,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
+            <TextBlock HorizontalAlignment="Left" Height="19" Margin="139,254,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="200" Foreground="white" TextAlignment="Center" FontSize="14"/>
+            <TextBox x:Name="txtPass" KeyDown="KeyLogin" HorizontalAlignment="Left" Height="23" Margin="139,273,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
 
-                <Button x:Name="btnLogin" Click="btnconnect" Content="Pieslēgties" HorizontalAlignment="Left" Margin="191,317,0,0" VerticalAlignment="Top" Width="100"/>
+            <Button x:Name="Pieslegties" Click="BtnLogin" Content="Pieslēgties" HorizontalAlignment="Left" Margin="191,317,0,0" VerticalAlignment="Top" Width="100"/>
+
+            <Button Content="X" HorizontalAlignment="Left" Margin="421,10,0,0" VerticalAlignment="Top" Width="30" Height="30" Click="Close"/>
+            <Button Content="-" HorizontalAlignment="Left" Margin="386,10,0,0" VerticalAlignment="Top" Width="30" Height="30" Click="Min"/>
 
         </Grid>
 
