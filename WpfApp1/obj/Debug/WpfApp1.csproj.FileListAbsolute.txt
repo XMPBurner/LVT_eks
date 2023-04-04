@@ -25,3 +25,6 @@ C:\xampp\htdocs\LVT_Eksamens\WpfApp1\bin\Debug\K4os.Hash.xxHash.dll
 C:\xampp\htdocs\LVT_Eksamens\WpfApp1\bin\Debug\MySql.Data.xml
 C:\xampp\htdocs\LVT_Eksamens\WpfApp1\obj\Debug\WpfApp1.exe.config
 C:\xampp\htdocs\LVT_Eksamens\WpfApp1\obj\Debug\WpfApp1.csproj.CopyComplete
+C:\xampp\htdocs\LVT_Eksamens\WpfApp1\bin\Debug\HandyControl.dll
+C:\xampp\htdocs\LVT_Eksamens\WpfApp1\bin\Debug\HandyControl.xml
+C:\xampp\htdocs\LVT_Eksamens\WpfApp1\obj\Debug\App.baml

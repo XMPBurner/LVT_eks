@@ -27,6 +27,12 @@ namespace WpfApp1
             InitializeComponent();
         }
 
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
+        }
+
         string connstring = @"server=localhost;userid=Porikis;password=admin;database=Porikis;port=3306";
 
         private void btnconnect(object sender, EventArgs e)
