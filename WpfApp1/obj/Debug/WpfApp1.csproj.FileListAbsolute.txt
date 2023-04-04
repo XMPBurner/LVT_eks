@@ -28,3 +28,5 @@ C:\xampp\htdocs\LVT_Eksamens\WpfApp1\obj\Debug\WpfApp1.csproj.CopyComplete
 C:\xampp\htdocs\LVT_Eksamens\WpfApp1\bin\Debug\HandyControl.dll
 C:\xampp\htdocs\LVT_Eksamens\WpfApp1\bin\Debug\HandyControl.xml
 C:\xampp\htdocs\LVT_Eksamens\WpfApp1\obj\Debug\App.baml
+C:\xampp\htdocs\LVT_Eksamens\WpfApp1\obj\Debug\Klienta_Logs.g.cs
+C:\xampp\htdocs\LVT_Eksamens\WpfApp1\obj\Debug\Klienta_Logs.baml
