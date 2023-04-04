@@ -83,7 +83,9 @@ namespace WpfApp1
                 }
                 else if (dbPassword == password)
                 {
-                    MessageBox.Show("Login successful!");
+                    Klienta_Logs p = new Klienta_Logs();
+                    Close();
+                    p.Show();
                 }
                 else
                 {
