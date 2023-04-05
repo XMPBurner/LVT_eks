@@ -6,10 +6,51 @@
              xmlns:hc="https://handyorg.github.io/handycontrol">
     <Application.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
+
+            <!--Stils Prieks Login Lapas-->
+            <Style x:Key="Login" TargetType="Border">
+                <Setter Property="CornerRadius" Value="50"/>
+                <Setter Property="BorderThickness" Value="5"/>
+                <Setter Property="BorderBrush">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#26008f" Offset="0.0" />
+                            <GradientStop Color="#6c008f" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#360147" Offset="0.0" />
+                            <GradientStop Color="#011636" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!--Background maiņā priekš "Grid"-->
+            <Style x:Key="BG" TargetType="Grid">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#360147" Offset="0.0" />
+                            <GradientStop Color="#011636" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!--Menu Button stili-->
+            <Style x:Key="MenuBtn" TargetType="Button">
+                <Setter Property="Height" Value="50"/>
+                <Setter Property="Width" Value="300"/>
+                <Setter Property="Background" Value="Black"/>
+                <Setter Property="FontSize" Value="25"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="BorderThickness" Value="0"/>
+            </Style>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

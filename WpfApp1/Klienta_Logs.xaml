@@ -6,23 +6,26 @@
         xmlns:local="clr-namespace:WpfApp1"
         xmlns:hc="https://handyorg.github.io/handycontrol" x:Class="WpfApp1.Klienta_Logs"
         mc:Ignorable="d"
-        Title="Klienta_Logs" Height="720" Width="1280" Background="#FF404040">
+        Title="Klienta_Logs" Height="720" Width="1280" Background="#FF404040" Icon="Logo_icon.png">
 
     <Grid>
-        <Image Source="/Images/Logo.png" Margin="0,579,972,0" Height="110" />
-        <hc:SideMenu HorizontalAlignment="Left" Height="479" VerticalAlignment="Top" Width="300">
-            <hc:SideMenu.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#360147" Offset="0.0" />
-                    <GradientStop Color="#011636" Offset="1.0" />
-                </LinearGradientBrush>
-            </hc:SideMenu.Background>
-            <Button Content="Button" Height="100" Width="75"/>
-        </hc:SideMenu>
 
-        <hc:Carousel HorizontalAlignment="Left" Margin="300,174,0,0" VerticalAlignment="Top" Width="972" Height="300"/>
-        <hc:ScrollViewer HorizontalAlignment="Left" Height="210" Margin="300,479,0,0" VerticalAlignment="Top" Width="972" Background="#FF6E6E6E">
-            <TextBlock TextWrapping="Wrap" Text="TextBlock"/>
-        </hc:ScrollViewer>
+        <Grid Margin="0,0,972,0" Style="{StaticResource ResourceKey=BG}">
+
+            <Image Source="/Images/Logo.png" Margin="10,0,10,539" Height="150"/>
+
+            <Button Margin="0,150,0,489" Content="Home" Style="{StaticResource ResourceKey=MenuBtn}"/>
+            <Button Margin="0,200,0,439" Content="Home" Style="{StaticResource ResourceKey=MenuBtn}"/>
+            <Button Margin="0,250,0,389" Content="Home" Style="{StaticResource ResourceKey=MenuBtn}"/>
+            <Button Margin="0,300,0,339" Content="Home" Style="{StaticResource ResourceKey=MenuBtn}"/>
+            <Button Margin="0,350,0,289" Content="Home" Style="{StaticResource ResourceKey=MenuBtn}"/>
+
+            <TextBlock HorizontalAlignment="Left" TextAlignment="Center" Foreground="white" Margin="66,483,0,0" FontSize="15" TextWrapping="Wrap" Text="Emīls Poriķis" VerticalAlignment="Top" Height="25" Width="168"/>
+            <TextBlock HorizontalAlignment="Left" TextAlignment="Center" Foreground="white" Margin="66,513,0,0" FontSize="13" TextWrapping="Wrap" Text="epasts@gmail.com" VerticalAlignment="Top" Width="168"/>
+
+            <Image Source="/Images/User_icon.png" Margin="0,535,0,0" HorizontalAlignment="center"/>
+
+        </Grid>
+
     </Grid>
 </Window>
