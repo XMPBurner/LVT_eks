@@ -14,21 +14,7 @@
 		AllowsTransparency="True"
 		MouseDown="Window_MouseDown">
 
-    <Border CornerRadius="50"
-			BorderThickness="5">
-        <Border.BorderBrush>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="#26008f" Offset="0.0" />
-                <GradientStop Color="#6c008f" Offset="1.0" />
-            </LinearGradientBrush>
-        </Border.BorderBrush>
-
-        <Border.Background>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="#360147" Offset="0.0" />
-                <GradientStop Color="#011636" Offset="1.0" />
-            </LinearGradientBrush>
-        </Border.Background>
+    <Border Style="{StaticResource ResourceKey=Login}">
 
         <Grid>
 
