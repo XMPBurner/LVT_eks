@@ -22,11 +22,11 @@
 
             <Image Source="/Images/Logo.png" Width="300" Height="Auto" Margin="100,50,100,337" />
 
-            <TextBlock HorizontalAlignment="Left" Height="19" Margin="139,187,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Width="200" Foreground="white" TextAlignment="Center" FontSize="14"/>
-            <TextBox x:Name="txtUser" HorizontalAlignment="Left" Height="23" Margin="139,205,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
+            <TextBlock HorizontalAlignment="Left" Height="19" Margin="139,187,0,0" TextWrapping="Wrap" Text="E-mail" VerticalAlignment="Top" Width="200" Foreground="white" TextAlignment="Center" FontSize="14"/>
+            <TextBox x:Name="email" HorizontalAlignment="Left" Height="23" Margin="139,205,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
 
             <TextBlock HorizontalAlignment="Left" Height="19" Margin="139,254,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="200" Foreground="white" TextAlignment="Center" FontSize="14"/>
-            <TextBox x:Name="txtPass" KeyDown="KeyLogin" HorizontalAlignment="Left" Height="23" Margin="139,273,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
+            <TextBox x:Name="password" KeyDown="KeyLogin" HorizontalAlignment="Left" Height="23" Margin="139,273,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
 
             <Button x:Name="Pieslegties" Click="BtnLogin" Content="Pieslēgties" HorizontalAlignment="Left" Margin="191,317,0,0" VerticalAlignment="Top" Width="100"/>
 

@@ -61,12 +61,12 @@ namespace WpfApp1
         {
             MySqlConnection cnn;
             cnn = new MySqlConnection(connstring);
-            bool lv = false;
-            string username = txtUser.Text;
-            string password = txtPass.Text;
+            bool Status = false;
+            string username = email.Text;
+            string Password = password.Text;
             cnn.Open();
 
-            MySqlCommand command = new MySqlCommand("SELECT Password, lv FROM logindb WHERE username=@username", cnn);
+            MySqlCommand command = new MySqlCommand("SELECT Email, Password, Status FROM lietotajs WHERE Email=@username", cnn);
             command.Parameters.AddWithValue("@username", username);
 
             // Execute the query and read the results
@@ -74,14 +74,14 @@ namespace WpfApp1
 
             if (reader.Read())
             {
-                string dbPassword = reader.GetString(0);
-                lv = reader.GetBoolean(1);
+                string dbPassword = reader.GetString(1);
+                Status = reader.GetBoolean(2);
 
-                if (dbPassword == password && lv)
+                if (dbPassword == Password && Status)
                 {
                     MessageBox.Show("Login successful as admin!");
                 }
-                else if (dbPassword == password)
+                else if (dbPassword == Password)
                 {
                     Klienta_Logs p = new Klienta_Logs();
                     Close();
@@ -97,8 +97,8 @@ namespace WpfApp1
                 MessageBox.Show("Invalid username or password.");
             }
 
-            txtUser.Text = string.Empty;
-            txtPass.Text = string.Empty;
+            email.Text = string.Empty;
+            password.Text = string.Empty;
             reader.Close();
             command.Dispose();
             cnn.Close(); // always close connection }

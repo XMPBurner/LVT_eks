@@ -61,3 +61,5 @@ C:\xampp\htdocs\Porikis_LVT_Eksamens\WpfApp1\obj\Debug\Naktsmītne.csproj.CoreCo
 C:\xampp\htdocs\Porikis_LVT_Eksamens\WpfApp1\obj\Debug\Naktsmītne.csproj.CopyComplete
 C:\xampp\htdocs\Porikis_LVT_Eksamens\WpfApp1\obj\Debug\WpfApp1.exe
 C:\xampp\htdocs\Porikis_LVT_Eksamens\WpfApp1\obj\Debug\WpfApp1.pdb
+C:\xampp\htdocs\Porikis_LVT_Eksamens\WpfApp1\bin\Debug\MySql.Data.dll
+C:\xampp\htdocs\Porikis_LVT_Eksamens\WpfApp1\bin\Debug\XanderUI.dll
