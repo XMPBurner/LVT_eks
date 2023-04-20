@@ -19,9 +19,17 @@ namespace WpfApp1
     /// </summary>
     public partial class Klienta_Logs : Window
     {
-        public Klienta_Logs()
+        public string AccEmail { get; set; }
+        public string AccVards { get; set; }
+        public string AccUzvards { get; set; }
+        public string AccNummur { get; set; }
+        public Klienta_Logs(string email, String Password)
         {
             InitializeComponent();
+
+            Liet_email.Text = email;
+            Liet_vards.Text = Password;
         }
+        
     }
 }

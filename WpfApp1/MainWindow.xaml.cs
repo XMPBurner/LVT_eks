@@ -62,12 +62,16 @@ namespace WpfApp1
             MySqlConnection cnn;
             cnn = new MySqlConnection(connstring);
             bool Status = false;
-            string username = email.Text;
+            string email = epasts.Text;
             string Password = password.Text;
+            //String Vards = "";
+            //String Uzvards = "";
+            //String Nummurs = "";
+            Klienta_Logs klients = new Klienta_Logs(email, Password);
             cnn.Open();
 
-            MySqlCommand command = new MySqlCommand("SELECT Email, Password, Status FROM lietotajs WHERE Email=@username", cnn);
-            command.Parameters.AddWithValue("@username", username);
+            MySqlCommand command = new MySqlCommand("SELECT Email, Password, Status FROM lietotajs WHERE Email=@email", cnn);
+            command.Parameters.AddWithValue("@email", email);
 
             // Execute the query and read the results
             MySqlDataReader reader = command.ExecuteReader();
@@ -83,13 +87,13 @@ namespace WpfApp1
                 }
                 else if (dbPassword == Password)
                 {
-                    Klienta_Logs p = new Klienta_Logs();
+                    klients.AccEmail = email;
                     Close();
-                    p.Show();
+                    klients.Show();
                 }
                 else
                 {
-                    MessageBox.Show("Invalid username or password.");
+                    MessageBox.Show("kautkas nav.");
                 }
             }
             else
@@ -97,7 +101,7 @@ namespace WpfApp1
                 MessageBox.Show("Invalid username or password.");
             }
 
-            email.Text = string.Empty;
+            epasts.Text = string.Empty;
             password.Text = string.Empty;
             reader.Close();
             command.Dispose();
