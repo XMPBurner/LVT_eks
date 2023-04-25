@@ -64,13 +64,10 @@ namespace WpfApp1
             bool Status = false;
             string email = epasts.Text;
             string Password = password.Text;
-            //String Vards = "";
-            //String Uzvards = "";
-            //String Nummurs = "";
-            Klienta_Logs klients = new Klienta_Logs(email, Password);
+
             cnn.Open();
 
-            MySqlCommand command = new MySqlCommand("SELECT Email, Password, Status FROM lietotajs WHERE Email=@email", cnn);
+            MySqlCommand command = new MySqlCommand("SELECT * FROM lietotajs WHERE Email=@email", cnn);
             command.Parameters.AddWithValue("@email", email);
 
             // Execute the query and read the results
@@ -78,16 +75,27 @@ namespace WpfApp1
 
             if (reader.Read())
             {
-                string dbPassword = reader.GetString(1);
-                Status = reader.GetBoolean(2);
+                string dbPassword = reader["Password"].ToString();
+                Status = Convert.ToBoolean(reader["Status"]);
+
+                string Vards = reader["Vards"].ToString();
+                string Uzvards = reader["Uzvards"].ToString();
+
+                Klienta_Logs klients = new Klienta_Logs(email, Vards, Uzvards);
 
                 if (dbPassword == Password && Status)
                 {
-                    MessageBox.Show("Login successful as admin!");
+                    klients.AccEmail = email;
+                    klients.AccVards = Vards;
+                    klients.AccUzvards = Uzvards;
+                    Close();
+                    klients.Show();
                 }
                 else if (dbPassword == Password)
                 {
                     klients.AccEmail = email;
+                    klients.AccVards = Vards;
+                    klients.AccUzvards = Uzvards;
                     Close();
                     klients.Show();
                 }

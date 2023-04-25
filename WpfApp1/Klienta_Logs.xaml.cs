@@ -22,13 +22,12 @@ namespace WpfApp1
         public string AccEmail { get; set; }
         public string AccVards { get; set; }
         public string AccUzvards { get; set; }
-        public string AccNummur { get; set; }
-        public Klienta_Logs(string email, String Password)
+        public Klienta_Logs(string email, string Vards, string Uzvards)
         {
             InitializeComponent();
 
             Liet_email.Text = email;
-            Liet_vards.Text = Password;
+            Liet_vards.Text = Vards + " " + Uzvards;
         }
         
     }
