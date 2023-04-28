@@ -1,0 +1,16 @@
+﻿<Page x:Class="WpfApp1.Home_page"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp1"
+      mc:Ignorable="d" 
+      d:DesignHeight="709" d:DesignWidth="967"
+      Title="Home_page"
+      Background="#FF404040">
+
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="293,176,0,0" TextWrapping="Wrap" Text="Hope page" Foreground="white" FontSize="40" VerticalAlignment="Top" Height="140" Width="378"/>
+
+    </Grid>
+</Page>

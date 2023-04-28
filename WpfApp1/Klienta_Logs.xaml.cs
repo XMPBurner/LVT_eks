@@ -25,10 +25,32 @@ namespace WpfApp1
         public Klienta_Logs(string email, string Vards, string Uzvards)
         {
             InitializeComponent();
+            MainFrame.Navigate(new Home_page());
 
             Liet_email.Text = email;
             Liet_vards.Text = Vards + " " + Uzvards;
         }
-        
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
+        }
+        private void Home_nav(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new Home_page());
+        }
+
+        private void Search_nav(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new Search_page());
+        }
+
+        private void Logout(object sender, RoutedEventArgs e)
+        {
+            MainWindow Login = new MainWindow();
+
+            Close();
+            Login.Show();
+        }
     }
 }

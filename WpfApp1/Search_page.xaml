@@ -1,0 +1,27 @@
+﻿<Page x:Class="WpfApp1.Search_page"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp1"
+      mc:Ignorable="d" 
+      d:DesignHeight="709" d:DesignWidth="967"
+      Title="Search_page"
+      Background="#FF404040">
+
+    <Grid>
+        <TextBlock Text="Valsts / iztabas skaits / WIFI / AC  / SIltums" Foreground="White" Margin="355,612,378,39"/>
+        <TextBlock HorizontalAlignment="Left" Foreground="White" FontWeight="Bold" FontSize="40" Margin="308,44,0,0" TextWrapping="Wrap" Text="Vienīču meklēšana" VerticalAlignment="Top"/>
+        
+        <ListView HorizontalAlignment="Left" Height="100" Margin="97,166,0,0" VerticalAlignment="Top" Width="100" SelectionChanged="ListView_SelectionChanged">
+            <ListView.View>
+                <GridView/>
+            </ListView.View>
+        </ListView>
+        
+        <CheckBox Content="WIFI" HorizontalAlignment="Left" Foreground="White" Margin="266,181,0,0" VerticalAlignment="Top" ClickMode="Press"/>
+        <CheckBox Content="AC" HorizontalAlignment="Left" Foreground="White" Margin="266,166,0,0" VerticalAlignment="Top" ClickMode="Press"/>
+        <CheckBox Content="Siltums" HorizontalAlignment="Left" Foreground="White" Margin="266,196,0,0" VerticalAlignment="Top" ClickMode="Press"/>
+        
+    </Grid>
+</Page>
