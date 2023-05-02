@@ -10,18 +10,49 @@
       Background="#FF404040">
 
     <Grid>
-        <TextBlock Text="Valsts / iztabas skaits / WIFI / AC  / SIltums" Foreground="White" Margin="355,612,378,39"/>
         <TextBlock HorizontalAlignment="Left" Foreground="White" FontWeight="Bold" FontSize="40" Margin="308,44,0,0" TextWrapping="Wrap" Text="Vienīču meklēšana" VerticalAlignment="Top"/>
-        
-        <ListView HorizontalAlignment="Left" Height="100" Margin="97,166,0,0" VerticalAlignment="Top" Width="100" SelectionChanged="ListView_SelectionChanged">
-            <ListView.View>
-                <GridView/>
-            </ListView.View>
-        </ListView>
-        
+
+
+
         <CheckBox Content="WIFI" HorizontalAlignment="Left" Foreground="White" Margin="266,181,0,0" VerticalAlignment="Top" ClickMode="Press"/>
         <CheckBox Content="AC" HorizontalAlignment="Left" Foreground="White" Margin="266,166,0,0" VerticalAlignment="Top" ClickMode="Press"/>
         <CheckBox Content="Siltums" HorizontalAlignment="Left" Foreground="White" Margin="266,196,0,0" VerticalAlignment="Top" ClickMode="Press"/>
-        
+        <TextBlock HorizontalAlignment="Left" Margin="111,132,0,0" TextWrapping="Wrap" Foreground="White" Text="Valsts" VerticalAlignment="Top" Height="29" Width="73"/>
+        <TextBlock HorizontalAlignment="Left" Margin="400,132,0,0" TextWrapping="Wrap" Foreground="White" Text="Skaits" VerticalAlignment="Top" Height="29" Width="73"/>
+
+
+
+        <Button Name="Valsts_poga" Click="Country_select" Content="Izvēlaties valsti" HorizontalAlignment="Left" Margin="84,161,0,0" VerticalAlignment="Top" Width="100"/>
+        <ListBox Name="Valsts_izvēle" Visibility="Collapsed" HorizontalAlignment="Left" Height="100" Margin="84,181,0,0" VerticalAlignment="Top" Width="100" SelectionChanged="Valsts_izvēles_maiņa">
+            <ListBoxItem>Liepāja</ListBoxItem>
+            <ListBoxItem>Lietuva</ListBoxItem>
+            <ListBoxItem>Igaunija</ListBoxItem>
+            <ListBoxItem>Krievija</ListBoxItem>
+        </ListBox>
+
+        <Button Name="Skaits_poga" Click="Skaits_select" Content="Izvēlaties skaits" HorizontalAlignment="Left" Margin="366,161,0,0" VerticalAlignment="Top" Width="100"/>
+        <ListBox Name="Skaits_izvēle" Visibility="Collapsed" HorizontalAlignment="Left" Height="100" Margin="366,181,0,0" VerticalAlignment="Top" Width="100" SelectionChanged="Skaitu_izvēles_maiņa">
+            <ListBoxItem>1</ListBoxItem>
+            <ListBoxItem>2</ListBoxItem>
+            <ListBoxItem>3</ListBoxItem>
+            <ListBoxItem>4</ListBoxItem>
+        </ListBox>
+
+
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="450" Height="251" Margin="10,448,0,0">
+            <StackPanel Height="251">
+                <Grid Width="450" Height="250">
+                    <TextBlock HorizontalAlignment="Right" Width="104" Margin="0,62,135,165">Valsts:"Nosaukums"</TextBlock>
+                    <Image Source="/Images/Room1.jpg" Stretch="Uniform"  Margin="0,0,244,3" />
+                    <TextBlock HorizontalAlignment="Right" Width="104" Margin="0,85,135,142"><Run Text="Piseta"/><Run Text=":&quot;Nosaukums&quot;"/></TextBlock>
+                    <TextBlock HorizontalAlignment="Right" Width="115" Margin="0,108,124,119"><Run Text="Adresse"/><Run Text=":&quot;Nosaukums&quot;"/></TextBlock>
+                    <TextBlock HorizontalAlignment="Right" Width="115" Margin="0,136,124,91"><Run Text="Rating"/><Run Text="s: 5/5"/></TextBlock>
+                    <TextBlock HorizontalAlignment="Right" Width="104" Margin="0,164,135,63"><Run Text="Cena"/><Run Text=":"/><Run Text="40$"/></TextBlock>
+                    <Image Source="/Images/Wifi.png" Margin="211,192,209,28" Width="30" Height="30"/>
+                    <Image Source="/Images/AC.png" Margin="246,192,174,28" Width="30" Height="30"/>
+
+                </Grid>
+            </StackPanel>
+        </Button>
     </Grid>
 </Page>

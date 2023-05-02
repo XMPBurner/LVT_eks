@@ -25,9 +25,36 @@ namespace WpfApp1
             InitializeComponent();
         }
 
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Country_select(object sender, RoutedEventArgs e)
         {
+            Valsts_izvēle.Visibility = Visibility.Visible;
+            Valsts_izvēle.Focus();
+        }
 
+        private void Valsts_izvēles_maiņa(object sender, SelectionChangedEventArgs e)
+        {
+            if (Valsts_izvēle.SelectedItem != null)
+            {
+                ListBoxItem selectedItem = (ListBoxItem)Valsts_izvēle.SelectedItem;
+                Valsts_poga.Content = selectedItem.Content;
+                Valsts_izvēle.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void Skaits_select(object sender, RoutedEventArgs e)
+        {
+            Skaits_izvēle.Visibility = Visibility.Visible;
+            Skaits_izvēle.Focus();
+        }
+
+        private void Skaitu_izvēles_maiņa(object sender, SelectionChangedEventArgs e)
+        {
+            if (Skaits_izvēle.SelectedItem != null)
+            {
+                ListBoxItem selectedItem = (ListBoxItem)Skaits_izvēle.SelectedItem;
+                Skaits_poga.Content = selectedItem.Content;
+                Skaits_izvēle.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }
