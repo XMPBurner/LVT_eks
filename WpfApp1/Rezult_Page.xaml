@@ -4,29 +4,30 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WpfApp1"
-      Height="709" Width="967"
       Title="Rezult_page"
       Background="#FF404040">
 
-    <Grid Name="MainGrid" Width="967" Height="709">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Name="MainGrid">
 
-        <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="create_test"/>
+            <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="create_test"/>
 
-        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="450" Height="250" Margin="280,148,0,0">
-            <StackPanel Height="251">
-                <Grid Width="450" Height="250">
-                    <TextBlock HorizontalAlignment="Right" Width="104" Margin="0,62,135,165">Valsts:"Nosaukums"</TextBlock>
-                    <Image Source="/Images/Room1.jpg" Stretch="Uniform"  Margin="0,0,244,3" />
-                    <TextBlock HorizontalAlignment="Right" Width="104" Margin="0,85,135,142"><Run Text="Piseta"/><Run Text=":&quot;Nosaukums&quot;"/></TextBlock>
-                    <TextBlock HorizontalAlignment="Right" Width="115" Margin="0,108,124,119"><Run Text="Adresse"/><Run Text=":&quot;Nosaukums&quot;"/></TextBlock>
-                    <TextBlock HorizontalAlignment="Right" Width="115" Margin="0,136,124,91"><Run Text="Rating"/><Run Text="s: 5/5"/></TextBlock>
-                    <TextBlock HorizontalAlignment="Right" Width="104" Margin="0,164,135,63"><Run Text="Cena"/><Run Text=":"/><Run Text="40$"/></TextBlock>
-                    <Image Source="/Images/Wifi.png" Margin="211,192,209,28" Width="30" Height="30"/>
-                    <Image Source="/Images/AC.png" Margin="246,192,174,28" Width="30" Height="30"/>
+            <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="450" Height="250" Margin="507,25,0,0">
+                <StackPanel Height="251">
+                    <Grid Width="450" Height="250">
+                        <TextBlock HorizontalAlignment="Right" Width="104" Margin="0,62,135,165">Valsts:"Nosaukums"</TextBlock>
+                        <Image Source="/Images/Room1.jpg" Stretch="Uniform"  Margin="0,0,244,3" />
+                        <TextBlock HorizontalAlignment="Right" Width="104" Margin="0,85,135,142"><Run Text="Piseta"/><Run Text=":&quot;Nosaukums&quot;"/></TextBlock>
+                        <TextBlock HorizontalAlignment="Right" Width="115" Margin="0,108,124,119"><Run Text="Adresse"/><Run Text=":&quot;Nosaukums&quot;"/></TextBlock>
+                        <TextBlock HorizontalAlignment="Right" Width="115" Margin="0,136,124,91"><Run Text="Rating"/><Run Text="s: 5/5"/></TextBlock>
+                        <TextBlock HorizontalAlignment="Right" Width="104" Margin="0,164,135,63"><Run Text="Cena"/><Run Text=":"/><Run Text="40$"/></TextBlock>
+                        <Image Source="/Images/Wifi.png" Margin="211,192,209,28" Width="30" Height="30"/>
+                        <Image Source="/Images/AC.png" Margin="246,192,174,28" Width="30" Height="30"/>
 
-                </Grid>
-            </StackPanel>
-        </Button>
+                    </Grid>
+                </StackPanel>
+            </Button>
 
-    </Grid>
+        </Grid>
+    </ScrollViewer>
 </Page>

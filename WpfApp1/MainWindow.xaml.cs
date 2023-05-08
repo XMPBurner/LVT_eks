@@ -42,7 +42,7 @@ namespace WpfApp1
             Close();
         }
 
-        string connstring = @"server=localhost;userid=Porikis;password=admin;database=Porikis;port=3306";
+        string connstring = @"server=localhost;userid=root;password=;database=Porikis;port=3306";
 
         private void KeyLogin(object sender, KeyEventArgs e)
         {
@@ -115,6 +115,64 @@ namespace WpfApp1
             command.Dispose();
             cnn.Close(); // always close connection }
             
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MySqlConnection cnn;
+            cnn = new MySqlConnection(connstring);
+            bool Status = false;
+            string email = "emils@gmail.com";
+            string Password = "Emils123";
+
+            cnn.Open();
+
+            MySqlCommand command = new MySqlCommand("SELECT * FROM lietotajs WHERE Email=@email", cnn);
+            command.Parameters.AddWithValue("@email", email);
+
+            // Execute the query and read the results
+            MySqlDataReader reader = command.ExecuteReader();
+
+            if (reader.Read())
+            {
+                string dbPassword = reader["Password"].ToString();
+                Status = Convert.ToBoolean(reader["Status"]);
+
+                string Vards = reader["Vards"].ToString();
+                string Uzvards = reader["Uzvards"].ToString();
+
+                Klienta_Logs klients = new Klienta_Logs(email, Vards, Uzvards);
+
+                if (dbPassword == Password && Status)
+                {
+                    klients.AccEmail = email;
+                    klients.AccVards = Vards;
+                    klients.AccUzvards = Uzvards;
+                    Close();
+                    klients.Show();
+                }
+                else if (dbPassword == Password)
+                {
+                    klients.AccEmail = email;
+                    klients.AccVards = Vards;
+                    klients.AccUzvards = Uzvards;
+                    Close();
+                    klients.Show();
+                }
+                else
+                {
+                    MessageBox.Show("kautkas nav.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Invalid username or password.");
+            }
+
+            epasts.Text = string.Empty;
+            password.Text = string.Empty;
+            reader.Close();
+            command.Dispose();
+            cnn.Close(); // always close connection }
         }
     } 
 }

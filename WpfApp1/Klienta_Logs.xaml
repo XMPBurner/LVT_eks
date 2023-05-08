@@ -21,7 +21,7 @@
 
             <Button Margin="0,150,0,489" Content="Home" Click="Home_nav" Style="{StaticResource ResourceKey=MenuBtn}"/>
             <Button Margin="0,200,0,439" Content="Search" Click="Search_nav" Style="{StaticResource ResourceKey=MenuBtn}"/>
-            <Button Margin="2,251,0,390" Content="test" Click="Rezult_nav" Style="{StaticResource ResourceKey=MenuBtn}"/>
+            <!--<Button Margin="2,251,0,390" Content="test" Click="Rezult_nav" Style="{StaticResource ResourceKey=MenuBtn}"/>-->
 
             <TextBlock Name="Liet_vards" HorizontalAlignment="Left" TextAlignment="Center" Foreground="white" Margin="66,483,0,0" FontSize="15" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="168"/>
             <TextBlock Name="Liet_email" HorizontalAlignment="Left" TextAlignment="Center" Foreground="white" Margin="66,513,0,0" FontSize="13" TextWrapping="Wrap" VerticalAlignment="Top" Width="168"/>

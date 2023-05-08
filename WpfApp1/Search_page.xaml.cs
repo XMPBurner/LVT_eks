@@ -56,5 +56,33 @@ namespace WpfApp1
                 Skaits_izvēle.Visibility = Visibility.Collapsed;
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            String Valsts = Valsts_poga.ContentStringFormat;
+            String Skaits = Skaits_poga.ContentStringFormat;
+            bool WIFI;
+            bool AC;
+
+            if (WIFI_ir.IsChecked ?? false)
+            {
+                WIFI = true;
+            }
+                WIFI = false;
+
+            if (AC_ir.IsChecked ?? false)
+            {
+                AC = true;
+            }
+                AC = false;
+
+            Rezult_Page Rezult = new Rezult_Page(Valsts, Skaits, WIFI, AC);
+
+            Rezult.Valsts = Valsts;
+            Rezult.Skaits = Skaits;
+            Rezult.WIFI = WIFI;
+            Rezult.AC = AC;
+
+        }
     }
 }
