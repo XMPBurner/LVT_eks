@@ -99,7 +99,6 @@ namespace WpfApp1
 
 
 
-
         //cnn.Open();
 
         //    MySqlCommand command = new MySqlCommand("SELECT * FROM iztaba WHERE Valsts=@Valsts and Skaits=@Skaits and Wifi=@WIFI and AC=@AC", cnn);

@@ -45,11 +45,6 @@ namespace WpfApp1
             MainFrame.Navigate(new Search_page());
         }
 
-        private void Rezult_nav(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Navigate(new Rezult_Page());
-        }
-
         private void Logout(object sender, RoutedEventArgs e)
         {
             MainWindow Login = new MainWindow();

@@ -9,37 +9,43 @@
       Title="Search_page"
       Background="#FF404040">
 
-    <Grid>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid Name="Search_Grid">
 
-        <TextBlock HorizontalAlignment="Left" Foreground="White" FontWeight="Bold" FontSize="40" Margin="308,44,0,0" TextWrapping="Wrap" Text="Vienīču meklēšana" VerticalAlignment="Top"/>
+                <TextBlock HorizontalAlignment="Left" Foreground="White" FontWeight="Bold" FontSize="40" Margin="308,44,0,0" TextWrapping="Wrap" Text="Vienīču meklēšana" VerticalAlignment="Top"/>
 
+                <CheckBox x:Name="WIFI" Content="WIFI" HorizontalAlignment="Left" Foreground="White" Margin="266,181,0,0" VerticalAlignment="Top" ClickMode="Press" Checked="WIFI_ir" Unchecked="WIFI_nav"/>
+                <CheckBox x:Name="AC" Content="AC" HorizontalAlignment="Left" Foreground="White" Margin="266,166,0,0" VerticalAlignment="Top" ClickMode="Press" Checked="AC_ir" Unchecked="AC_nav"/>
+            
+                <TextBlock HorizontalAlignment="Left" Margin="111,132,0,0" TextWrapping="Wrap" Foreground="White" Text="Valsts" VerticalAlignment="Top" Height="29" Width="73"/>
+                <TextBlock HorizontalAlignment="Left" Margin="400,132,0,0" TextWrapping="Wrap" Foreground="White" Text="Skaits" VerticalAlignment="Top" Height="29" Width="73"/>
 
+                <Button Name="Valsts_poga" Click="Country_select" Content="Izvēlaties valsti" HorizontalAlignment="Left" Margin="84,161,0,0" VerticalAlignment="Top" Width="100"/>
+                <ListBox Name="Valsts_izvēle" Visibility="Collapsed" HorizontalAlignment="Left" Height="100" Margin="84,181,0,0" VerticalAlignment="Top" Width="100" SelectionChanged="Valsts_izvēles_maiņa">
+                    <ListBoxItem>Latvija</ListBoxItem>
+                    <ListBoxItem>Lietuva</ListBoxItem>
+                    <ListBoxItem>Igaunija</ListBoxItem>
+                    <ListBoxItem>Krievija</ListBoxItem>
+                </ListBox>
 
-        <CheckBox Name="WIFI_ir" Content="WIFI" HorizontalAlignment="Left" Foreground="White" Margin="266,181,0,0" VerticalAlignment="Top" ClickMode="Press"/>
-        <CheckBox Name="AC_ir" Content="AC" HorizontalAlignment="Left" Foreground="White" Margin="266,166,0,0" VerticalAlignment="Top" ClickMode="Press"/>
-        <CheckBox Content="Siltums" HorizontalAlignment="Left" Foreground="White" Margin="266,196,0,0" VerticalAlignment="Top" ClickMode="Press"/>
-        <TextBlock HorizontalAlignment="Left" Margin="111,132,0,0" TextWrapping="Wrap" Foreground="White" Text="Valsts" VerticalAlignment="Top" Height="29" Width="73"/>
-        <TextBlock HorizontalAlignment="Left" Margin="400,132,0,0" TextWrapping="Wrap" Foreground="White" Text="Skaits" VerticalAlignment="Top" Height="29" Width="73"/>
+                <Button Name="Skaits_poga" Click="Skaits_select" Content="Izvēlaties skaits" HorizontalAlignment="Left" Margin="366,161,0,0" VerticalAlignment="Top" Width="100"/>
+                <ListBox Name="Skaits_izvēle" Visibility="Collapsed" HorizontalAlignment="Left" Height="100" Margin="366,181,0,0" VerticalAlignment="Top" Width="100" SelectionChanged="Skaitu_izvēles_maiņa">
+                    <ListBoxItem>1</ListBoxItem>
+                    <ListBoxItem>2</ListBoxItem>
+                    <ListBoxItem>3</ListBoxItem>
+                    <ListBoxItem>4</ListBoxItem>
+                </ListBox>
+                   
+                <Button Content="Search" HorizontalAlignment="Left" Margin="505,147,0,0" VerticalAlignment="Top" Width="124" Height="64" Click="Search"/>
+        
+            </Grid>
 
+            <Grid Name="Rezult_Grid">
 
+                <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="create_test"/>
 
-        <Button Name="Valsts_poga" Click="Country_select" Content="Izvēlaties valsti" HorizontalAlignment="Left" Margin="84,161,0,0" VerticalAlignment="Top" Width="100"/>
-        <ListBox Name="Valsts_izvēle" Visibility="Collapsed" HorizontalAlignment="Left" Height="100" Margin="84,181,0,0" VerticalAlignment="Top" Width="100" SelectionChanged="Valsts_izvēles_maiņa">
-            <ListBoxItem>Latvija</ListBoxItem>
-            <ListBoxItem>Lietuva</ListBoxItem>
-            <ListBoxItem>Igaunija</ListBoxItem>
-            <ListBoxItem>Krievija</ListBoxItem>
-        </ListBox>
-
-        <Button Name="Skaits_poga" Click="Skaits_select" Content="Izvēlaties skaits" HorizontalAlignment="Left" Margin="366,161,0,0" VerticalAlignment="Top" Width="100"/>
-        <ListBox Name="Skaits_izvēle" Visibility="Collapsed" HorizontalAlignment="Left" Height="100" Margin="366,181,0,0" VerticalAlignment="Top" Width="100" SelectionChanged="Skaitu_izvēles_maiņa">
-            <ListBoxItem>1</ListBoxItem>
-            <ListBoxItem>2</ListBoxItem>
-            <ListBoxItem>3</ListBoxItem>
-            <ListBoxItem>4</ListBoxItem>
-        </ListBox>
-        <Button Content="Search" HorizontalAlignment="Left" Margin="492,236,0,0" VerticalAlignment="Top" Width="124" Height="64" Click="Button_Click"/>
-
-        <Button Content="test change" Width="140" Click="Button_Click_1" Height="48" Margin="231,354,596,307"/>
-    </Grid>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
 </Page>
