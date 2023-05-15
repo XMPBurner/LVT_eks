@@ -89,6 +89,12 @@ namespace WpfApp1
             cnn = new MySqlConnection(connstring);
             String Valsts = Valsts_poga.Content.ToString();
             String Skaits = Skaits_poga.Content.ToString();
+            String Pilseta = "";
+            String Adresse = "";
+            String Ratings = "";
+            String Cena = "";
+
+            int count = 0;
 
             bool Wifi;
             bool Ac;
@@ -99,9 +105,9 @@ namespace WpfApp1
 
             cnn.Open();
 
-            MySqlCommand command = new MySqlCommand("SELECT h.Hotelis_ID, h.Valsts, h.Pilsēta, h.Adresse, i.Izstaba_ID, i.Skaits, i.Wifi, i.AC, i.Siltums, i.Ratings, i.Cena " +
+            MySqlCommand command = new MySqlCommand("SELECT h.Valsts, h.Pilsēta, h.Adresse, i.Ratings, i.Cena, COUNT(i.Izstaba_ID) AS Izstabu_skaits " +
                                                     "FROM izstaba AS i LEFT JOIN hotelis AS h ON i.Hotelis_ID = h.Hotelis_ID " +
-                                                    "WHERE h.Valsts = @Valsts and i.Skaits = @Skaits", cnn);
+                                                    "WHERE h.Valsts = @Valsts AND i.Skaits = @Skaits", cnn);
             command.Parameters.AddWithValue("@Valsts", Valsts);
             command.Parameters.AddWithValue("@Skaits", Skaits);
 
@@ -109,8 +115,14 @@ namespace WpfApp1
 
             if (reader.Read())
             {
+                count = Convert.ToInt32(reader["Izstabu_skaits"]);
 
-                for (int i = 0; i < 5; i++)
+                string pil = reader.GetString(1);
+                string adr = reader.GetString(2);
+                string rat = reader["Ratings"].ToString();
+                string cen = reader["Cena"].ToString();
+
+                for (int i = 0; i < (count+1)/2; i++)
                 {
                     RowDefinition Row = new RowDefinition();
                     Rezult_Grid.RowDefinitions.Add(Row);
@@ -126,18 +138,37 @@ namespace WpfApp1
 
                 Rezult_Grid.HorizontalAlignment = HorizontalAlignment.Center;
 
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < count; i++)
                 {
 
-                    Button testpoga = new Button();
-                    testpoga.Content = "test poga " + (i + 1);
-                    testpoga.Width = 450;
-                    testpoga.Height = 250;
+                    Button Naktsmītne = new Button();
+                    StackPanel stackPanel = new StackPanel();
 
-                    Rezult_Grid.Children.Add(testpoga);
+                    TextBlock text1 = new TextBlock();
+                    TextBlock text2 = new TextBlock();
+                    TextBlock text3 = new TextBlock();
+                    TextBlock text4 = new TextBlock();
+                    TextBlock text5 = new TextBlock();
 
-                    Grid.SetRow(testpoga, row);
-                    Grid.SetColumn(testpoga, col);
+                    stackPanel.Children.Add(text1);
+                    stackPanel.Children.Add(text2);
+                    stackPanel.Children.Add(text3);
+                    stackPanel.Children.Add(text4);
+                    stackPanel.Children.Add(text5);
+
+                    Naktsmītne.Width = 450;
+                    Naktsmītne.Height = 250;
+                    text1.Text = "Valsts:  " + Valsts;
+                    text2.Text = "Pilsēta: " + pil;
+                    text3.Text = "Adresse: " + adr;
+                    text4.Text = "Rating:  " + rat;
+                    text5.Text = "Cena:    " + cen;
+
+                    Naktsmītne.Content = stackPanel;
+                    Rezult_Grid.Children.Add(Naktsmītne);
+
+                    Grid.SetRow(Naktsmītne, row);
+                    Grid.SetColumn(Naktsmītne, col);
 
                     col++;
                     if (col >= maxCols)
@@ -150,52 +181,6 @@ namespace WpfApp1
             else
             {
                 MessageBox.Show("Kautkas neiet");
-            }
-        }
-
-        private void create_test(object sender, RoutedEventArgs e)
-        {
-            Search_Grid.Visibility = Visibility.Hidden;
-
-            int row = 0;
-            int col = 0;
-            int maxCols = 2;
-
-            for (int i = 0; i < 5; i++)
-            {
-                RowDefinition Row = new RowDefinition();
-                Rezult_Grid.RowDefinitions.Add(Row);
-                Rezult_Grid.RowDefinitions[i].Height = new GridLength(300);
-            }
-
-            for (int i = 0; i < 2; i++)
-            {
-                ColumnDefinition Col = new ColumnDefinition();
-                Rezult_Grid.ColumnDefinitions.Add(Col);
-                Rezult_Grid.ColumnDefinitions[i].Width = new GridLength(480);
-            }
-
-            Rezult_Grid.HorizontalAlignment = HorizontalAlignment.Center;
-
-            for (int i = 0; i < 10; i++)
-            {
-
-                Button testpoga = new Button();
-                testpoga.Content = "test poga " + (i + 1);
-                testpoga.Width = 450;
-                testpoga.Height = 250;
-
-                Rezult_Grid.Children.Add(testpoga);
-
-                Grid.SetRow(testpoga, row);
-                Grid.SetColumn(testpoga, col);
-
-                col++;
-                if (col >= maxCols)
-                {
-                    col = 0;
-                    row++;
-                }
             }
         }
 

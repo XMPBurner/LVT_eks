@@ -69,9 +69,6 @@
     <Compile Include="Home_page.xaml.cs">
       <DependentUpon>Home_page.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Rezult_Page.xaml.cs">
-      <DependentUpon>Rezult_Page.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Search_page.xaml.cs">
       <DependentUpon>Search_page.xaml</DependentUpon>
     </Compile>
@@ -98,10 +95,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Rezult_Page.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Search_page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
