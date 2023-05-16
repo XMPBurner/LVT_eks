@@ -15,27 +15,52 @@
 		MouseDown="Window_MouseDown">
 
     <Border Style="{StaticResource ResourceKey=Login}">
-
         <Grid>
 
+                <Button Content="X" HorizontalAlignment="Left" Margin="421,10,0,0" VerticalAlignment="Top" Width="30" Height="30" Click="Close"/>
+                <Button Content="-" HorizontalAlignment="Left" Margin="386,10,0,0" VerticalAlignment="Top" Width="30" Height="30" Click="Min"/>
 
+            <Grid Name="Login_Grid" Visibility="Hidden">
 
-            <Image Source="/Images/Logo.png" Width="300" Height="Auto" Margin="100,50,100,337" />
+                <Image Source="/Images/Logo.png" Width="300" Height="Auto" Margin="100,50,100,337" />
 
-            <TextBlock HorizontalAlignment="Left" Height="19" Margin="139,187,0,0" TextWrapping="Wrap" Text="E-mail" VerticalAlignment="Top" Width="200" Foreground="white" TextAlignment="Center" FontSize="14"/>
-            <TextBox x:Name="epasts" HorizontalAlignment="Left" Height="23" Margin="139,205,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
+                <TextBlock HorizontalAlignment="Left" Height="19" Margin="139,187,0,0" TextWrapping="Wrap" Text="E-mail" VerticalAlignment="Top" Width="200" Foreground="white" TextAlignment="Center" FontSize="14"/>
+                <TextBox x:Name="epasts" HorizontalAlignment="Left" Height="23" Margin="139,205,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
 
-            <TextBlock HorizontalAlignment="Left" Height="19" Margin="139,254,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="200" Foreground="white" TextAlignment="Center" FontSize="14"/>
-            <TextBox x:Name="password" KeyDown="KeyLogin" HorizontalAlignment="Left" Height="23" Margin="139,273,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
+                <TextBlock HorizontalAlignment="Left" Height="19" Margin="139,254,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="200" Foreground="white" TextAlignment="Center" FontSize="14"/>
+                <TextBox x:Name="password" KeyDown="KeyLogin" HorizontalAlignment="Left" Height="23" Margin="139,273,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
 
-            <Button x:Name="Pieslegties" Click="BtnLogin" Content="Pieslēgties" HorizontalAlignment="Left" Margin="191,317,0,0" VerticalAlignment="Top" Width="100"/>
+                <Button x:Name="Pieslegties" Click="BtnLogin" Content="Pieslēgties" HorizontalAlignment="Left" Margin="191,317,0,0" VerticalAlignment="Top" Width="100"/>
 
-            <Button Content="X" HorizontalAlignment="Left" Margin="421,10,0,0" VerticalAlignment="Top" Width="30" Height="30" Click="Close"/>
-            <Button Content="-" HorizontalAlignment="Left" Margin="386,10,0,0" VerticalAlignment="Top" Width="30" Height="30" Click="Min"/>
-            <Button Content="Auto connect" HorizontalAlignment="Left" Margin="52,436,0,0" VerticalAlignment="Top" Width="144" Height="50" Click="Button_Click"/>
+                <Button Content="Auto connect" HorizontalAlignment="Left" Margin="52,436,0,0" VerticalAlignment="Top" Width="144" Height="50" Click="AUTO_CONNECT"/>
 
+                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="163,351,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="23" Width="176">
+                    Ja nav konts, varat izveidot 
+                    <Hyperlink Click="Konta_izveide">
+                        <TextBlock Text="Šeit!"/>
+                    </Hyperlink>
+                </TextBlock>
+
+            </Grid>
+
+            <Grid Name="Create_Grid">
+
+                <TextBox x:Name="Vards" HorizontalAlignment="Left" Height="23" Margin="77,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+                <TextBox x:Name="Uzvards" HorizontalAlignment="Left" Height="23" Margin="77,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+                <TextBox x:Name="Nummurs" HorizontalAlignment="Left" Height="23" Margin="77,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" MaxLength="8" PreviewTextInput="Nummuru_Ievade"/>
+                <TextBox x:Name="Epasts" HorizontalAlignment="Left" Height="23" Margin="77,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+                <TextBox x:Name="Parole" HorizontalAlignment="Left" Height="23" Margin="77,298,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+                
+                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="265,131,0,0" TextWrapping="Wrap" Text="Vārds" VerticalAlignment="Top"/>
+                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="265,166,0,0" TextWrapping="Wrap" Text="Uzvāds" VerticalAlignment="Top"/>
+                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="265,217,0,0" TextWrapping="Wrap" Text="Nummurs" VerticalAlignment="Top"/>
+                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="265,255,0,0" TextWrapping="Wrap" Text="E-pasts" VerticalAlignment="Top"/>
+                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="265,305,0,0" TextWrapping="Wrap" Text="Parole" VerticalAlignment="Top"/>
+                
+                <Button Content="Atpakaļ" HorizontalAlignment="Left" Margin="92,413,0,0" VerticalAlignment="Top" Width="121" Height="52" Click="Atpakaļ"/>
+                <Button Content="Izveidot" HorizontalAlignment="Left" Margin="265,413,0,0" VerticalAlignment="Top" Width="121" Height="52" Click="Izveidot"/>
+
+            </Grid>
         </Grid>
-
     </Border>
-
 </Window>

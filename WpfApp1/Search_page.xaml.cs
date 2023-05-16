@@ -89,10 +89,6 @@ namespace WpfApp1
             cnn = new MySqlConnection(connstring);
             String Valsts = Valsts_poga.Content.ToString();
             String Skaits = Skaits_poga.Content.ToString();
-            String Pilseta = "";
-            String Adresse = "";
-            String Ratings = "";
-            String Cena = "";
 
             int count = 0;
 
@@ -201,11 +197,6 @@ namespace WpfApp1
         //          </Grid>
         //      </StackPanel>
         //  </Button>
-
-
-
-
-
 
     }
 }

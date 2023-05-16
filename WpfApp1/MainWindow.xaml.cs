@@ -13,18 +13,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Configuration;
+using System.Text.RegularExpressions;
 using MySql.Data.MySqlClient;
 
 namespace WpfApp1
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+            Login_Grid.Visibility = Visibility.Visible;
+            Create_Grid.Visibility = Visibility.Hidden;
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -101,12 +101,12 @@ namespace WpfApp1
                 }
                 else
                 {
-                    MessageBox.Show("kautkas nav.");
+                    MessageBox.Show("Kļūda sistēmā!");
                 }
             }
             else
             {
-                MessageBox.Show("Invalid username or password.");
+                MessageBox.Show("Nepareizi ievadīts e-pasts vai parole!");
             }
 
             epasts.Text = string.Empty;
@@ -116,7 +116,7 @@ namespace WpfApp1
             cnn.Close(); // always close connection }
             
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void AUTO_CONNECT(object sender, RoutedEventArgs e)   //AUTO CONNECT: JADZĒŠ ĀRĀ PĒCTAM
         {
             MySqlConnection cnn;
             cnn = new MySqlConnection(connstring);
@@ -160,19 +160,116 @@ namespace WpfApp1
                 }
                 else
                 {
-                    MessageBox.Show("kautkas nav.");
+                    MessageBox.Show("Kļūda sistēmā!");
                 }
             }
             else
             {
-                MessageBox.Show("Invalid username or password.");
+                MessageBox.Show("Nepareizi ievadīts e-pasts vai parole!");
             }
 
             epasts.Text = string.Empty;
             password.Text = string.Empty;
             reader.Close();
             command.Dispose();
-            cnn.Close(); // always close connection }
+            cnn.Close();
+        }
+
+        private void Konta_izveide(object sender, RoutedEventArgs e)
+        {
+            Login_Grid.Visibility = Visibility.Hidden;
+            Create_Grid.Visibility = Visibility.Visible;
+
+            epasts.Text = string.Empty;
+            password.Text = string.Empty;
+        }
+
+        private void Atpakaļ(object sender, RoutedEventArgs e)
+        {
+            Login_Grid.Visibility = Visibility.Visible;
+            Create_Grid.Visibility = Visibility.Hidden;
+
+            Vards.Text = string.Empty;
+            Uzvards.Text = string.Empty;
+            Nummurs.Text = string.Empty;
+            Epasts.Text = string.Empty;
+            Parole.Text = string.Empty;
+        }
+
+        private void Nummuru_Ievade(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+        private void Izveidot(object sender, RoutedEventArgs e)
+        {
+            MySqlConnection cnn;
+            cnn = new MySqlConnection(connstring);
+
+            string Vards_j = Vards.Text;
+            string Uzvards_j = Uzvards.Text;
+            string Nummurs_j = Nummurs.Text;
+            string Epasts_j = Epasts.Text;
+            string Parole_j = Parole.Text;
+
+            cnn.Open();
+
+            MySqlCommand command = new MySqlCommand("SELECT * FROM lietotajs WHERE Email=@email", cnn);
+            command.Parameters.AddWithValue("@email", Epasts_j);
+
+            // Execute the query and read the results
+            MySqlDataReader reader = command.ExecuteReader();
+
+            if (reader.Read())
+            {
+                MessageBox.Show("Tāds e-pasts jau eksistē!");
+
+                Epasts.Text = string.Empty;
+                Parole.Text = string.Empty;
+            }
+            else
+            {
+                cnn = new MySqlConnection(connstring);
+
+                cnn.Open();
+
+                MySqlCommand insert = new MySqlCommand("INSERT INTO Lietotajs (Vards, Uzvards, Email, Password, Nummurs, Status) " +
+                                                       "Values(@Vards, @Uzvards, @Epasts, @Parole, @Nummurs, 0)", cnn);
+
+                insert.Parameters.AddWithValue("@Vards", Vards_j);
+                insert.Parameters.AddWithValue("@Uzvards", Uzvards_j);
+                insert.Parameters.AddWithValue("@Nummurs", Nummurs_j);
+                insert.Parameters.AddWithValue("@Epasts", Epasts_j);
+                insert.Parameters.AddWithValue("@Parole", Parole_j);
+
+                int ievietots = insert.ExecuteNonQuery();
+
+                if(ievietots > 0)
+                {
+                    MessageBox.Show("Jūsu konts ir izveidots!");
+
+                    Login_Grid.Visibility = Visibility.Visible;
+                    Create_Grid.Visibility = Visibility.Hidden;
+
+                    Vards.Text = string.Empty;
+                    Uzvards.Text = string.Empty;
+                    Nummurs.Text = string.Empty;
+                    Epasts.Text = string.Empty;
+                    Parole.Text = string.Empty;
+                }
+                else
+                {
+                    MessageBox.Show("Jūsu konts Netika izveidots!");
+
+                    Epasts.Text = string.Empty;
+                    Parole.Text = string.Empty;
+                }
+
+                reader.Close();
+                command.Dispose();
+                insert.Dispose();
+                cnn.Close();
+            }
         }
     } 
 }
