@@ -20,7 +20,7 @@
                 <Button Content="X" HorizontalAlignment="Left" Margin="421,10,0,0" VerticalAlignment="Top" Width="30" Height="30" Click="Close"/>
                 <Button Content="-" HorizontalAlignment="Left" Margin="386,10,0,0" VerticalAlignment="Top" Width="30" Height="30" Click="Min"/>
 
-            <Grid Name="Login_Grid" Visibility="Hidden">
+            <Grid Name="Login_Grid" Visibility="Visible">
 
                 <Image Source="/Images/Logo.png" Width="300" Height="Auto" Margin="100,50,100,337" />
 
@@ -43,7 +43,7 @@
 
             </Grid>
 
-            <Grid Name="Create_Grid">
+            <Grid Name="Create_Grid" Visibility="Hidden">
 
                 <TextBox x:Name="Vards" HorizontalAlignment="Left" Height="23" Margin="77,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
                 <TextBox x:Name="Uzvards" HorizontalAlignment="Left" Height="23" Margin="77,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>

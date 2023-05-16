@@ -203,6 +203,18 @@ namespace WpfApp1
         }
         private void Izveidot(object sender, RoutedEventArgs e)
         {
+
+            TextBox[] Jaunie_dati = { Vards, Uzvards, Nummurs, Epasts, Parole };
+
+            bool nav_ievadits = Jaunie_dati.Any(textBox => string.IsNullOrEmpty(textBox.Text));
+
+            if (nav_ievadits)
+            {
+                MessageBox.Show("Nav ievadīti visi svarīgie dati!");
+                return;
+            }
+
+
             MySqlConnection cnn;
             cnn = new MySqlConnection(connstring);
 
