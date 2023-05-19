@@ -215,7 +215,7 @@ namespace WpfApp1
 
             cnn.Open();
 
-            MySqlCommand command = new MySqlCommand("SELECT h.Valsts, h.Pilsēta, h.Adresse, i.Ratings, i.Cena, COUNT(i.Izstaba_ID) AS Izstabu_skaits " +
+            MySqlCommand command = new MySqlCommand("SELECT h.Valsts, h.Pilsēta, h.Adresse, i.Ratings, i.Cena, COUNT(h.Hotelis_ID) AS Izstabu_skaits " +
                                                     "FROM izstaba AS i LEFT JOIN hotelis AS h ON i.Hotelis_ID = h.Hotelis_ID " +
                                                     "WHERE h.Valsts = @Valsts AND i.Skaits = @Skaits and i.Wifi = " + Wifi + " and i.AC = " + Ac + "", cnn);
             command.Parameters.AddWithValue("@Valsts", Valsts);
@@ -223,97 +223,20 @@ namespace WpfApp1
 
             MySqlDataReader reader = command.ExecuteReader();
 
-            if (reader.Read())
+            while (reader.Read())
             {
+
                 int count = Convert.ToInt32(reader["Izstabu_skaits"]);
 
-                List<string> pilsList = new List<string>();
-                List<string> adrList = new List<string>();
-                List<string> ratList = new List<string>();
-                List<string> cenList = new List<string>();
+                string pil = reader.GetString(1);
+                string adr = reader.GetString(2);
+                string rat = reader["Ratings"].ToString();
+                string cen = reader["Cena"].ToString();
 
-                do
-                {
-                    string pil = reader.GetString(1);
-                    string adr = reader.GetString(2);
-                    string rat = reader["Ratings"].ToString();
-                    string cen = reader["Cena"].ToString();
+                Console.WriteLine($"Pilsēta: {pil}");
 
-                    pilsList.Add(pil);
-                    adrList.Add(adr);
-                    ratList.Add(rat);
-                    cenList.Add(cen);
-
-                    count--;
-                } while (count > 0);
-
-                for (int i = 0; i < (count + 1) / 2; i++)
-                {
-                    RowDefinition Row = new RowDefinition();
-                    Rezult_Grid.RowDefinitions.Add(Row);
-                    Rezult_Grid.RowDefinitions[i].Height = new GridLength(300);
-                }
-
-                for (int i = 0; i < 2; i++)
-                {
-                    ColumnDefinition Col = new ColumnDefinition();
-                    Rezult_Grid.ColumnDefinitions.Add(Col);
-                    Rezult_Grid.ColumnDefinitions[i].Width = new GridLength(480);
-                }
-
-                Rezult_Grid.HorizontalAlignment = HorizontalAlignment.Center;
-
-                foreach (var pil in pilsList)
-                {
-                    string adr = adrList.First();
-                    adrList.RemoveAt(0);
-                    string rat = ratList.First();
-                    ratList.RemoveAt(0);
-                    string cen = cenList.First();
-                    cenList.RemoveAt(0);
-
-                    Button Naktsmītne = new Button();
-                    StackPanel stackPanel = new StackPanel();
-
-                    TextBlock text1 = new TextBlock();
-                    TextBlock text2 = new TextBlock();
-                    TextBlock text3 = new TextBlock();
-                    TextBlock text4 = new TextBlock();
-                    TextBlock text5 = new TextBlock();
-
-                    stackPanel.Children.Add(text1);
-                    stackPanel.Children.Add(text2);
-                    stackPanel.Children.Add(text3);
-                    stackPanel.Children.Add(text4);
-                    stackPanel.Children.Add(text5);
-
-                    Naktsmītne.Width = 450;
-                    Naktsmītne.Height = 250;
-
-                    text1.Text = "Valsts:  " + Valsts;
-                    text2.Text = "Pilsēta: " + pil;
-                    text3.Text = "Adresse: " + adr;
-                    text4.Text = "Rating:  " + rat;
-                    text5.Text = "Cena:    " + cen;
-
-                    Naktsmītne.Content = stackPanel;
-                    Rezult_Grid.Children.Add(Naktsmītne);
-
-                    Grid.SetRow(Naktsmītne, row);
-                    Grid.SetColumn(Naktsmītne, col);
-
-                    col++;
-                    if (col >= maxCols)
-                    {
-                        col = 0;
-                        row++;
-                    }
-                }
             }
-            else
-            {
-                MessageBox.Show("Kautkas neiet");
-            }
+
         }
 
     }

@@ -42,6 +42,31 @@ namespace WpfApp1
             Close();
         }
 
+        public bool email_clear = true;
+        public bool password_clear = true;
+
+        private void Clear_email(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+
+            if (email_clear)
+            {
+                textBox.Text = string.Empty;
+                email_clear = false;
+            }
+        }
+
+        private void Clear_password(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+
+            if (password_clear)
+            {
+                textBox.Text = string.Empty;
+                password_clear = false;
+            }
+        }
+
         string connstring = @"server=localhost;userid=root;password=;database=Porikis;port=3306";
 
         private void KeyLogin(object sender, KeyEventArgs e)
