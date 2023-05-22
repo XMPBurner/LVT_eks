@@ -42,11 +42,7 @@
 
             </Grid>
 
-            <Grid Name="Rezult_Grid">
-
-                
-
-            </Grid>
+            <Grid Name="Rezult_Grid"/>
         </Grid>
     </ScrollViewer>
 </Page>

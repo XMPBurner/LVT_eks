@@ -25,7 +25,7 @@
                 <Image Source="/Images/Logo.png" Width="300" Height="Auto" Margin="100,50,100,337" />
 
                 <TextBlock HorizontalAlignment="Left" Height="19" Margin="139,187,0,0" TextWrapping="Wrap" Text="E-mail" VerticalAlignment="Top" Width="200" Foreground="white" TextAlignment="Center" FontSize="14"/>
-                <TextBox x:Name="epasts" GotFocus="Clear_email" Text="E-mail" Padding="3" HorizontalAlignment="Left" Height="30" Margin="139,205,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Style="{StaticResource ResourceKey=Login_TextBox}">
+                <TextBox x:Name="epasts" Padding="3" HorizontalAlignment="Left" Height="30" Margin="139,205,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Style="{StaticResource ResourceKey=Login_TextBox}">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>
@@ -34,13 +34,20 @@
                 </TextBox>
 
                 <TextBlock HorizontalAlignment="Left" Height="19" Margin="139,254,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="200" Foreground="white" TextAlignment="Center" FontSize="14"/>
-                <TextBox x:Name="password" GotFocus="Clear_password" KeyDown="KeyLogin" Text="Password" Padding="3" HorizontalAlignment="Left" Height="30" Margin="139,273,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Style="{StaticResource ResourceKey=Login_TextBox}">
-                    <TextBox.Resources>
+                <PasswordBox x:Name="password" KeyDown="KeyLogin" Padding="3" HorizontalAlignment="Left" Height="30" Margin="139,273,0,0" VerticalAlignment="Top" Width="200" Style="{StaticResource ResourceKey=Login_Password}">
+                    <PasswordBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>
                         </Style>
-                    </TextBox.Resources>
-                </TextBox>
+                    </PasswordBox.Resources>
+                    <PasswordBox.Template>
+                        <ControlTemplate TargetType="{x:Type PasswordBox}">
+                            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="15">
+                                <ScrollViewer x:Name="PART_ContentHost"/>
+                            </Border>
+                        </ControlTemplate>
+                    </PasswordBox.Template>
+                </PasswordBox>
 
                 <Button x:Name="Pieslegties" Click="BtnLogin" Content="Pieslēgties" HorizontalAlignment="Left" Margin="191,317,0,0" VerticalAlignment="Top" Width="100"/>
 
@@ -57,12 +64,53 @@
 
             <Grid Name="Create_Grid" Visibility="Hidden">
 
-                <TextBox x:Name="Vards" HorizontalAlignment="Left" Height="23" Margin="77,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
-                <TextBox x:Name="Uzvards" HorizontalAlignment="Left" Height="23" Margin="77,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
-                <TextBox x:Name="Nummurs" HorizontalAlignment="Left" Height="23" Margin="77,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" MaxLength="8" PreviewTextInput="Nummuru_Ievade"/>
-                <TextBox x:Name="Epasts" HorizontalAlignment="Left" Height="23" Margin="77,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
-                <TextBox x:Name="Parole" HorizontalAlignment="Left" Height="23" Margin="77,298,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
-                
+                <TextBox x:Name="Vards" Padding="3" HorizontalAlignment="Left" Height="30" Margin="77,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Style="{StaticResource ResourceKey=Login_TextBox}">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="15"/>
+                    </Style>
+                </TextBox.Resources>
+                </TextBox>
+
+                <TextBox x:Name="Uzvards" Padding="3" HorizontalAlignment="Left" Height="30" Margin="77,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Style="{StaticResource ResourceKey=Login_TextBox}">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="15"/>
+                    </Style>
+                </TextBox.Resources>
+                </TextBox>
+
+                <TextBox x:Name="Nummurs" Padding="3" HorizontalAlignment="Left" Height="30" Margin="77,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" MaxLength="8" PreviewTextInput="Nummuru_Ievade" Style="{StaticResource ResourceKey=Login_TextBox}">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="15"/>
+                    </Style>
+                </TextBox.Resources>
+                </TextBox>
+
+                <TextBox x:Name="Epasts" Padding="3" HorizontalAlignment="Left" Height="30" Margin="77,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Style="{StaticResource ResourceKey=Login_TextBox}">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="15"/>
+                    </Style>
+                </TextBox.Resources>
+                </TextBox>
+
+                <PasswordBox x:Name="Parole" Padding="3" HorizontalAlignment="Left" Height="30" Margin="77,298,0,0" VerticalAlignment="Top" Width="150" Style="{StaticResource ResourceKey=Login_Password}">
+                    <PasswordBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </PasswordBox.Resources>
+                    <PasswordBox.Template>
+                        <ControlTemplate TargetType="{x:Type PasswordBox}">
+                            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="15">
+                                <ScrollViewer x:Name="PART_ContentHost"/>
+                            </Border>
+                        </ControlTemplate>
+                    </PasswordBox.Template>
+                </PasswordBox>
+
                 <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="265,131,0,0" TextWrapping="Wrap" Text="Vārds" VerticalAlignment="Top"/>
                 <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="265,166,0,0" TextWrapping="Wrap" Text="Uzvāds" VerticalAlignment="Top"/>
                 <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="265,217,0,0" TextWrapping="Wrap" Text="Nummurs" VerticalAlignment="Top"/>

@@ -43,6 +43,20 @@
                 </Setter>
             </Style>
 
+            <Style x:Key="Login_Password" TargetType="PasswordBox">
+                <Setter Property="Foreground" Value="white"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="3"/>
+                <Setter Property="BorderBrush">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Offset="0" Color="#6c008f"/>
+                            <GradientStop Offset="1" Color="#26008f"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
             <!--Background krāsu maiņā priekš "Grid"-->
             <Style x:Key="BG" TargetType="Grid">
                 <Setter Property="Background">

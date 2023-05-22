@@ -66,12 +66,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Admin_page.xaml.cs">
+      <DependentUpon>Admin_page.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Home_page.xaml.cs">
       <DependentUpon>Home_page.xaml</DependentUpon>
     </Compile>
     <Compile Include="Search_page.xaml.cs">
       <DependentUpon>Search_page.xaml</DependentUpon>
     </Compile>
+    <Page Include="Admin_page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Home_page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

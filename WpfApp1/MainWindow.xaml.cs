@@ -42,31 +42,6 @@ namespace WpfApp1
             Close();
         }
 
-        public bool email_clear = true;
-        public bool password_clear = true;
-
-        private void Clear_email(object sender, RoutedEventArgs e)
-        {
-            TextBox textBox = (TextBox)sender;
-
-            if (email_clear)
-            {
-                textBox.Text = string.Empty;
-                email_clear = false;
-            }
-        }
-
-        private void Clear_password(object sender, RoutedEventArgs e)
-        {
-            TextBox textBox = (TextBox)sender;
-
-            if (password_clear)
-            {
-                textBox.Text = string.Empty;
-                password_clear = false;
-            }
-        }
-
         string connstring = @"server=localhost;userid=root;password=;database=Porikis;port=3306";
 
         private void KeyLogin(object sender, KeyEventArgs e)
@@ -86,9 +61,9 @@ namespace WpfApp1
         {
             MySqlConnection cnn;
             cnn = new MySqlConnection(connstring);
-            bool Status = false;
+            bool Status;
             string email = epasts.Text;
-            string Password = password.Text;
+            string Password = password.Password;
 
             cnn.Open();
 
@@ -106,13 +81,14 @@ namespace WpfApp1
                 string Vards = reader["Vards"].ToString();
                 string Uzvards = reader["Uzvards"].ToString();
 
-                Klienta_Logs klients = new Klienta_Logs(email, Vards, Uzvards);
+                Klienta_Logs klients = new Klienta_Logs(email, Vards, Uzvards, Status);
 
                 if (dbPassword == Password && Status)
                 {
                     klients.AccEmail = email;
                     klients.AccVards = Vards;
                     klients.AccUzvards = Uzvards;
+                    klients.AccStatus = Status;
                     Close();
                     klients.Show();
                 }
@@ -135,7 +111,7 @@ namespace WpfApp1
             }
 
             epasts.Text = string.Empty;
-            password.Text = string.Empty;
+            password.Password = string.Empty;
             reader.Close();
             command.Dispose();
             cnn.Close(); // always close connection }
@@ -146,6 +122,7 @@ namespace WpfApp1
             MySqlConnection cnn;
             cnn = new MySqlConnection(connstring);
             bool Status = false;
+            bool AS = false;
             string email = "emils@gmail.com";
             string Password = "Emils123";
 
@@ -165,13 +142,14 @@ namespace WpfApp1
                 string Vards = reader["Vards"].ToString();
                 string Uzvards = reader["Uzvards"].ToString();
 
-                Klienta_Logs klients = new Klienta_Logs(email, Vards, Uzvards);
+                Klienta_Logs klients = new Klienta_Logs(email, Vards, Uzvards, Status);
 
                 if (dbPassword == Password && Status)
                 {
                     klients.AccEmail = email;
                     klients.AccVards = Vards;
                     klients.AccUzvards = Uzvards;
+                    klients.AccStatus = Status;
                     Close();
                     klients.Show();
                 }
@@ -194,7 +172,7 @@ namespace WpfApp1
             }
 
             epasts.Text = string.Empty;
-            password.Text = string.Empty;
+            password.Password = string.Empty;
             reader.Close();
             command.Dispose();
             cnn.Close();
@@ -206,7 +184,7 @@ namespace WpfApp1
             Create_Grid.Visibility = Visibility.Visible;
 
             epasts.Text = string.Empty;
-            password.Text = string.Empty;
+            password.Password = string.Empty;
         }
 
         private void Atpakaļ(object sender, RoutedEventArgs e)
@@ -218,7 +196,7 @@ namespace WpfApp1
             Uzvards.Text = string.Empty;
             Nummurs.Text = string.Empty;
             Epasts.Text = string.Empty;
-            Parole.Text = string.Empty;
+            Parole.Password = string.Empty;
         }
 
         private void Nummuru_Ievade(object sender, TextCompositionEventArgs e)
@@ -229,9 +207,11 @@ namespace WpfApp1
         private void Izveidot(object sender, RoutedEventArgs e)
         {
 
-            TextBox[] Jaunie_dati = { Vards, Uzvards, Nummurs, Epasts, Parole };
+            TextBox[] Jaunie_dati = { Vards, Uzvards, Nummurs, Epasts };
+            PasswordBox[] Paroles = { Parole };
 
-            bool nav_ievadits = Jaunie_dati.Any(textBox => string.IsNullOrEmpty(textBox.Text));
+            bool nav_ievadits = Jaunie_dati.Any(textBox => string.IsNullOrEmpty(textBox.Text))
+                                || Paroles.Any(passwordBox => string.IsNullOrEmpty(passwordBox.Password));
 
             if (nav_ievadits)
             {
@@ -247,7 +227,7 @@ namespace WpfApp1
             string Uzvards_j = Uzvards.Text;
             string Nummurs_j = Nummurs.Text;
             string Epasts_j = Epasts.Text;
-            string Parole_j = Parole.Text;
+            string Parole_j = Parole.Password;
 
             cnn.Open();
 
@@ -262,7 +242,7 @@ namespace WpfApp1
                 MessageBox.Show("Tāds e-pasts jau eksistē!");
 
                 Epasts.Text = string.Empty;
-                Parole.Text = string.Empty;
+                Parole.Password = string.Empty;
             }
             else
             {
@@ -292,14 +272,14 @@ namespace WpfApp1
                     Uzvards.Text = string.Empty;
                     Nummurs.Text = string.Empty;
                     Epasts.Text = string.Empty;
-                    Parole.Text = string.Empty;
+                    Parole.Password = string.Empty;
                 }
                 else
                 {
                     MessageBox.Show("Jūsu konts Netika izveidots!");
 
                     Epasts.Text = string.Empty;
-                    Parole.Text = string.Empty;
+                    Parole.Password = string.Empty;
                 }
 
                 reader.Close();
