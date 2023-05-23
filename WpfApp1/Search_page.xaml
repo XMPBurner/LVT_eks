@@ -11,13 +11,13 @@
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid>
-            <Grid Name="Search_Grid">
+            <Grid Name="Search_Grid" Visibility="Hidden">
 
                 <TextBlock HorizontalAlignment="Left" Foreground="White" FontWeight="Bold" FontSize="40" Margin="308,44,0,0" TextWrapping="Wrap" Text="Vienīču meklēšana" VerticalAlignment="Top"/>
 
                 <CheckBox x:Name="WIFI" Content="WIFI" HorizontalAlignment="Left" Foreground="White" Margin="266,181,0,0" VerticalAlignment="Top" ClickMode="Press" Checked="WIFI_ir" Unchecked="WIFI_nav"/>
                 <CheckBox x:Name="AC" Content="AC" HorizontalAlignment="Left" Foreground="White" Margin="266,166,0,0" VerticalAlignment="Top" ClickMode="Press" Checked="AC_ir" Unchecked="AC_nav"/>
-            
+
                 <TextBlock HorizontalAlignment="Left" Margin="111,132,0,0" TextWrapping="Wrap" Foreground="White" Text="Valsts" VerticalAlignment="Top" Height="29" Width="73"/>
                 <TextBlock HorizontalAlignment="Left" Margin="400,132,0,0" TextWrapping="Wrap" Foreground="White" Text="Skaits" VerticalAlignment="Top" Height="29" Width="73"/>
 
@@ -36,13 +36,34 @@
                     <ListBoxItem>3</ListBoxItem>
                     <ListBoxItem>4</ListBoxItem>
                 </ListBox>
-                   
+
                 <Button Content="Search" HorizontalAlignment="Left" Margin="505,147,0,0" VerticalAlignment="Top" Width="124" Height="64" Click="Search"/>
-                <Button Content="Search test" HorizontalAlignment="Left" Margin="505,244,0,0" VerticalAlignment="Top" Width="124" Height="64" Click="Search_test"/>
 
             </Grid>
 
             <Grid Name="Rezult_Grid"/>
+
+            <Grid Name="Rezervet">
+                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="74,380,0,0" TextWrapping="Wrap" Text="Valsts" VerticalAlignment="Top" Height="22" Width="55"/>
+                <Button Content="Atpakaļ" HorizontalAlignment="Left" Margin="125,595,0,0" VerticalAlignment="Top" Width="315" Height="69"/>
+                <Button Content="Rezervēt" HorizontalAlignment="Left" Margin="518,595,0,0" VerticalAlignment="Top" Width="330" Height="69"/>
+                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="75,407,0,0" TextWrapping="Wrap" Text="Pilsēta" VerticalAlignment="Top" Height="22" Width="55"/>
+                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="75,434,0,0" TextWrapping="Wrap" Text="Nosaukums" VerticalAlignment="Top" Height="22" Width="82"/>
+                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="74,461,0,0" TextWrapping="Wrap" Text="skaits" VerticalAlignment="Top" Height="22" Width="55"/>
+                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="75,488,0,0" TextWrapping="Wrap" Text="Ratings" VerticalAlignment="Top" Height="22" Width="55"/>
+                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="75,515,0,0" TextWrapping="Wrap" Text="Cena:" VerticalAlignment="Top" Height="22" Width="54"/>
+                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="262,453,0,0" TextWrapping="Wrap" Text="E-Pasts" VerticalAlignment="Top" Height="22" Width="54"/>
+                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="490,380,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" Width="54"/>
+                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="262,380,0,0" TextWrapping="Wrap" Text="Vards" VerticalAlignment="Top" Height="22" Width="54"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="218,402,0,0" TextWrapping="Wrap" Text="Emīls Poriķis" VerticalAlignment="Top" Width="120"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="218,475,0,0" TextWrapping="Wrap" Text="epasts@gmail.com" VerticalAlignment="Top" Width="120"/>
+
+                <DatePicker HorizontalAlignment="Left" Margin="477,399,0,0" VerticalAlignment="Top"/>
+
+
+
+
+            </Grid>
         </Grid>
     </ScrollViewer>
 </Page>

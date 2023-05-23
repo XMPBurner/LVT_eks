@@ -25,7 +25,6 @@ namespace WpfApp1
         public Search_page()
         {
             InitializeComponent();
-            //Rezult_Grid.Visibility = Visibility.Hidden;
         }
 
         private void Country_select(object sender, RoutedEventArgs e)
@@ -93,85 +92,96 @@ namespace WpfApp1
             String Valsts = Valsts_poga.Content.ToString();
             String Skaits = Skaits_poga.Content.ToString();
 
-            int count = 0;
-
             int row = 0;
             int col = 0;
             int maxCols = 2;
 
             cnn.Open();
 
-            MySqlCommand command = new MySqlCommand("SELECT h.Valsts, h.Pilsēta, h.Adresse, i.Ratings, i.Cena, COUNT(i.Izstaba_ID) AS Izstabu_skaits " +
-                                                    "FROM izstaba AS i LEFT JOIN hotelis AS h ON i.Hotelis_ID = h.Hotelis_ID " +
-                                                    "WHERE h.Valsts = @Valsts AND i.Skaits = @Skaits and i.Wifi = " + Wifi + " and i.AC = " + Ac + "", cnn);
-            command.Parameters.AddWithValue("@Valsts", Valsts);
-            command.Parameters.AddWithValue("@Skaits", Skaits);
+            MySqlCommand countcommand = new MySqlCommand("SELECT COUNT(*) " +
+                                                        "FROM izstaba AS i LEFT JOIN hotelis AS h ON i.Hotelis_ID = h.Hotelis_ID " +
+                                                        "WHERE h.Valsts = @Valsts AND i.Skaits = @Skaits AND i.Wifi = " + Wifi + " and i.AC = " + Ac + " ", cnn);
+            countcommand.Parameters.AddWithValue("@Valsts", Valsts);
+            countcommand.Parameters.AddWithValue("@Skaits", Skaits);
 
-            MySqlDataReader reader = command.ExecuteReader();
+            int count = Convert.ToInt32(countcommand.ExecuteScalar());
 
-            if (reader.Read())
+            if (count > 0)
             {
-                count = Convert.ToInt32(reader["Izstabu_skaits"]);
+                MySqlCommand command = new MySqlCommand("SELECT h.Pilsēta, h.Adresse, i.Ratings, i.Cena " +
+                                                        "FROM izstaba AS i LEFT JOIN hotelis AS h ON i.Hotelis_ID = h.Hotelis_ID " +
+                                                        "WHERE h.Valsts = @Valsts AND i.Skaits = @Skaits AND i.Wifi = " + Wifi + " and i.AC = " + Ac + " ", cnn);
+                command.Parameters.AddWithValue("@Valsts", Valsts);
+                command.Parameters.AddWithValue("@Skaits", Skaits);
 
-                string pil = reader.GetString(1);
-                string adr = reader.GetString(2);
-                string rat = reader["Ratings"].ToString();
-                string cen = reader["Cena"].ToString();
-
-                for (int i = 0; i < (count+1)/2; i++)
-                {
-                    RowDefinition Row = new RowDefinition();
-                    Rezult_Grid.RowDefinitions.Add(Row);
-                    Rezult_Grid.RowDefinitions[i].Height = new GridLength(300);
-                }
-
-                for (int i = 0; i < 2; i++)
-                {
-                    ColumnDefinition Col = new ColumnDefinition();
-                    Rezult_Grid.ColumnDefinitions.Add(Col);
-                    Rezult_Grid.ColumnDefinitions[i].Width = new GridLength(480);
-                }
-
-                Rezult_Grid.HorizontalAlignment = HorizontalAlignment.Center;
-
-                for (int i = 0; i < count; i++)
+                using (MySqlDataReader reader = command.ExecuteReader())
                 {
 
-                    Button Naktsmītne = new Button();
-                    StackPanel stackPanel = new StackPanel();
+                        for (int i = 0; i < (count + 1) / 2; i++)
+                        {
+                            RowDefinition Row = new RowDefinition();
+                            Rezult_Grid.RowDefinitions.Add(Row);
+                            Rezult_Grid.RowDefinitions[i].Height = new GridLength(300);
+                        }
 
-                    TextBlock text1 = new TextBlock();
-                    TextBlock text2 = new TextBlock();
-                    TextBlock text3 = new TextBlock();
-                    TextBlock text4 = new TextBlock();
-                    TextBlock text5 = new TextBlock();
+                        for (int i = 0; i < 2; i++)
+                        {
+                            ColumnDefinition Col = new ColumnDefinition();
+                            Rezult_Grid.ColumnDefinitions.Add(Col);
+                            Rezult_Grid.ColumnDefinitions[i].Width = new GridLength(480);
+                        }
 
-                    stackPanel.Children.Add(text1);
-                    stackPanel.Children.Add(text2);
-                    stackPanel.Children.Add(text3);
-                    stackPanel.Children.Add(text4);
-                    stackPanel.Children.Add(text5);
+                        Rezult_Grid.HorizontalAlignment = HorizontalAlignment.Center;
 
-                    Naktsmītne.Width = 450;
-                    Naktsmītne.Height = 250;
-
-                    text1.Text = "Valsts:  " + Valsts;
-                    text2.Text = "Pilsēta: " + pil;
-                    text3.Text = "Adresse: " + adr;
-                    text4.Text = "Rating:  " + rat;
-                    text5.Text = "Cena:    " + cen;
-
-                    Naktsmītne.Content = stackPanel;
-                    Rezult_Grid.Children.Add(Naktsmītne);
-
-                    Grid.SetRow(Naktsmītne, row);
-                    Grid.SetColumn(Naktsmītne, col);
-
-                    col++;
-                    if (col >= maxCols)
+                    for (int i = 0; i < count; i++)
                     {
-                        col = 0;
-                        row++;
+                        if (reader.Read())
+                        {
+                            string pil = reader.GetString(0);
+                            string adr = reader.GetString(1);
+                            string rat = reader["Ratings"].ToString();
+                            string cen = reader["Cena"].ToString();
+
+                            Button Naktsmītne = new Button();
+                            Naktsmītne.Click += izvele;
+                            Naktsmītne.Tag = new Tuple<string, string, string, string, string>(Valsts, pil, adr, rat, cen);
+
+                            StackPanel stackPanel = new StackPanel();
+
+                            TextBlock text1 = new TextBlock();
+                            TextBlock text2 = new TextBlock();
+                            TextBlock text3 = new TextBlock();
+                            TextBlock text4 = new TextBlock();
+                            TextBlock text5 = new TextBlock();
+
+                            stackPanel.Children.Add(text1);
+                            stackPanel.Children.Add(text2);
+                            stackPanel.Children.Add(text3);
+                            stackPanel.Children.Add(text4);
+                            stackPanel.Children.Add(text5);
+
+                            Naktsmītne.Width = 450;
+                            Naktsmītne.Height = 250;
+
+                            text1.Text = "Valsts:  " + Valsts;
+                            text2.Text = "Pilsēta: " + pil;
+                            text3.Text = "Adresse: " + adr;
+                            text4.Text = "Rating:  " + rat;
+                            text5.Text = "Cena:    " + cen;
+
+                            Naktsmītne.Content = stackPanel;
+                            Rezult_Grid.Children.Add(Naktsmītne);
+
+                            Grid.SetRow(Naktsmītne, row);
+                            Grid.SetColumn(Naktsmītne, col);
+
+                            col++;
+                            if (col >= maxCols)
+                            {
+                                col = 0;
+                                row++;
+                            }
+                        }
                     }
                 }
             }
@@ -179,8 +189,30 @@ namespace WpfApp1
             {
                 MessageBox.Show("Kautkas neiet");
             }
+            cnn.Close();
         }
 
+        private void izvele(object sender, RoutedEventArgs e)
+        {
+
+            Button izveleta_poga = (Button)sender;
+
+            Tuple<string, string, string, string, string> buttonValues = (Tuple<string, string, string, string, string>)izveleta_poga.Tag;
+
+            string Valsts = buttonValues.Item1;
+            string pil = buttonValues.Item2;
+            string adr = buttonValues.Item3;
+            string rat = buttonValues.Item4;
+            string cen = buttonValues.Item5;
+
+            Console.WriteLine("Valsts: " + Valsts);
+            Console.WriteLine("Pilsēta: " + pil);
+            Console.WriteLine("Adresse: " + adr);
+            Console.WriteLine("Ratings: " + rat);
+            Console.WriteLine("Cena: " + cen);
+
+
+        }
 
         //  <Button HorizontalAlignment = "Left" VerticalAlignment="Top" Width="450" Height="250" Margin="507,25,0,0">
         //      <StackPanel Height = "251" >
@@ -198,46 +230,6 @@ namespace WpfApp1
         //          </Grid>
         //      </StackPanel>
         //  </Button>
-
-
-        private void Search_test(object sender, RoutedEventArgs e)
-        {
-            Search_Grid.Visibility = Visibility.Hidden;
-
-            MySqlConnection cnn;
-            cnn = new MySqlConnection(connstring);
-            String Valsts = Valsts_poga.Content.ToString();
-            String Skaits = Skaits_poga.Content.ToString();
-
-            int row = 0;
-            int col = 0;
-            int maxCols = 2;
-
-            cnn.Open();
-
-            MySqlCommand command = new MySqlCommand("SELECT h.Valsts, h.Pilsēta, h.Adresse, i.Ratings, i.Cena, COUNT(h.Hotelis_ID) AS Izstabu_skaits " +
-                                                    "FROM izstaba AS i LEFT JOIN hotelis AS h ON i.Hotelis_ID = h.Hotelis_ID " +
-                                                    "WHERE h.Valsts = @Valsts AND i.Skaits = @Skaits and i.Wifi = " + Wifi + " and i.AC = " + Ac + "", cnn);
-            command.Parameters.AddWithValue("@Valsts", Valsts);
-            command.Parameters.AddWithValue("@Skaits", Skaits);
-
-            MySqlDataReader reader = command.ExecuteReader();
-
-            while (reader.Read())
-            {
-
-                int count = Convert.ToInt32(reader["Izstabu_skaits"]);
-
-                string pil = reader.GetString(1);
-                string adr = reader.GetString(2);
-                string rat = reader["Ratings"].ToString();
-                string cen = reader["Cena"].ToString();
-
-                Console.WriteLine($"Pilsēta: {pil}");
-
-            }
-
-        }
 
     }
 }

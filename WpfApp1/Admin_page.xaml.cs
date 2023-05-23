@@ -82,8 +82,6 @@ namespace WpfApp1
 
             command.ExecuteNonQuery();
 
-            //Datu_tabula.Rows.Remove(row);
-
             Data_Table.Items.Refresh();
             cnn.Close();
         }
