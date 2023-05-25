@@ -12,19 +12,32 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
 using MySql.Data.MySqlClient;
 
 namespace WpfApp1
 {
     public partial class Search_page : Page
     {
+        public string AccEmail { get; set; }
+        public string AccVards { get; set; }
+        public string AccUzvards { get; set; }
+
         public bool Wifi = false;
         public bool Ac = false;
+        public int cen;
 
         string connstring = @"server=localhost;userid=root;password=;database=Porikis;port=3306";
-        public Search_page()
+        public Search_page(string email, string Vards, string Uzvards)
         {
             InitializeComponent();
+            Search_Grid.Visibility = Visibility.Visible;
+            Rezult_Grid.Visibility = Visibility.Hidden;
+            Rezervet.Visibility = Visibility.Hidden;
+
+            Rezevetaja_Vards.Text = Vards;
+            Rezevetaja_Uzvards.Text = Uzvards;
+            Rezevetaja_Epasts.Text = email;
         }
 
         private void Country_select(object sender, RoutedEventArgs e)
@@ -86,6 +99,7 @@ namespace WpfApp1
         private void Search(object sender, RoutedEventArgs e)
         {
             Search_Grid.Visibility = Visibility.Hidden;
+            Rezult_Grid.Visibility = Visibility.Visible;
 
             MySqlConnection cnn;
             cnn = new MySqlConnection(connstring);
@@ -117,21 +131,21 @@ namespace WpfApp1
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
 
-                        for (int i = 0; i < (count + 1) / 2; i++)
-                        {
-                            RowDefinition Row = new RowDefinition();
-                            Rezult_Grid.RowDefinitions.Add(Row);
-                            Rezult_Grid.RowDefinitions[i].Height = new GridLength(300);
-                        }
+                    for (int i = 0; i < (count + 1) / 2; i++)
+                    {
+                        RowDefinition Row = new RowDefinition();
+                        Rezult_Grid.RowDefinitions.Add(Row);
+                        Rezult_Grid.RowDefinitions[i].Height = new GridLength(300);
+                    }
 
-                        for (int i = 0; i < 2; i++)
-                        {
-                            ColumnDefinition Col = new ColumnDefinition();
-                            Rezult_Grid.ColumnDefinitions.Add(Col);
-                            Rezult_Grid.ColumnDefinitions[i].Width = new GridLength(480);
-                        }
+                    for (int i = 0; i < 2; i++)
+                    {
+                        ColumnDefinition Col = new ColumnDefinition();
+                        Rezult_Grid.ColumnDefinitions.Add(Col);
+                        Rezult_Grid.ColumnDefinitions[i].Width = new GridLength(480);
+                    }
 
-                        Rezult_Grid.HorizontalAlignment = HorizontalAlignment.Center;
+                    Rezult_Grid.HorizontalAlignment = HorizontalAlignment.Center;
 
                     for (int i = 0; i < count; i++)
                     {
@@ -140,11 +154,11 @@ namespace WpfApp1
                             string pil = reader.GetString(0);
                             string adr = reader.GetString(1);
                             string rat = reader["Ratings"].ToString();
-                            string cen = reader["Cena"].ToString();
+                            cen = reader.GetInt32(reader.GetOrdinal("Cena"));
 
                             Button Naktsmītne = new Button();
                             Naktsmītne.Click += izvele;
-                            Naktsmītne.Tag = new Tuple<string, string, string, string, string>(Valsts, pil, adr, rat, cen);
+                            Naktsmītne.Tag = new Tuple<string, string, string, string, int>(Valsts, pil, adr, rat, cen);
 
                             StackPanel stackPanel = new StackPanel();
 
@@ -197,22 +211,127 @@ namespace WpfApp1
 
             Button izveleta_poga = (Button)sender;
 
-            Tuple<string, string, string, string, string> buttonValues = (Tuple<string, string, string, string, string>)izveleta_poga.Tag;
+            Tuple<string, string, string, string, int> buttonValues = (Tuple<string, string, string, string, int>)izveleta_poga.Tag;
 
             string Valsts = buttonValues.Item1;
             string pil = buttonValues.Item2;
             string adr = buttonValues.Item3;
             string rat = buttonValues.Item4;
-            string cen = buttonValues.Item5;
+            cen = buttonValues.Item5;
 
-            Console.WriteLine("Valsts: " + Valsts);
-            Console.WriteLine("Pilsēta: " + pil);
-            Console.WriteLine("Adresse: " + adr);
-            Console.WriteLine("Ratings: " + rat);
-            Console.WriteLine("Cena: " + cen);
+            R_Valsts.Text = "Valsts: " + Valsts;
+            R_Pilseta.Text = "Pilsēta: " + pil;
+            R_Adresse.Text = "Adresse: " + adr;
+            R_Ratings.Text = "Ratings: " + rat;
+            R_Cena.Text = "Cena: " + cen;
+
+            Rezult_Grid.Visibility = Visibility.Hidden;
+            Rezervet.Visibility = Visibility.Visible;
 
 
         }
+
+        private void Atpakal_meklet(object sender, RoutedEventArgs e)
+        {
+            Rezult_Grid.Visibility = Visibility.Visible;
+            Rezervet.Visibility = Visibility.Hidden;
+        }
+
+        private void Sakum_Datumu_maina(object sender, SelectionChangedEventArgs e)
+        {
+            DateTime selectedDate = Sakum_datums.SelectedDate ?? DateTime.MinValue;
+            Beigu_datums.DisplayDateStart = selectedDate.AddDays(1);
+
+            Cenu_aprekins();
+        }
+
+        private void Beigu_Datumu_maina(object sender, SelectionChangedEventArgs e)
+        {
+            DateTime selectedDate = Beigu_datums.SelectedDate ?? DateTime.MaxValue;
+            Sakum_datums.DisplayDateEnd = selectedDate.AddDays(-1);
+
+            Cenu_aprekins();
+        }
+
+        private void Cenu_aprekins()
+        {
+            if (Sakum_datums.SelectedDate.HasValue && Beigu_datums.SelectedDate.HasValue)
+            {
+                DateTime startDate = Sakum_datums.SelectedDate.Value;
+                DateTime endDate = Beigu_datums.SelectedDate.Value;
+
+                // Calculate the price based on the number of days
+                TimeSpan duration = endDate - startDate;
+                int numberOfDays = duration.Days;
+                int pilna_cena = cen * numberOfDays;
+
+                // Display the calculated price
+                R_Cena.Text = "Cena: " + pilna_cena;
+            }
+        }
+
+        private void Kartes_nummuru_ievade(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+
+            TextBox textBox = (TextBox)sender;
+
+            // Get the current caret position
+            int caretIndex = textBox.CaretIndex;
+
+            // Remove any existing spaces from the text
+            string text = textBox.Text.Replace(" ", "");
+
+            // Insert a space every fourth character
+            int spaceCount = text.Length / 4;
+            for (int i = 1; i <= spaceCount; i++)
+            {
+                int insertPosition = i * 4 + (i - 1);
+                text = text.Insert(insertPosition, " ");
+            }
+
+            // Update the TextBox text with the formatted string
+            textBox.Text = text;
+
+            // Set the caret position to the original index, adjusted for added spaces
+            int adjustedCaretIndex = caretIndex + (caretIndex / 4);
+            textBox.CaretIndex = adjustedCaretIndex;
+        }
+
+        private void Kartes_CVC_ievade(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void Kartes_terminu_ievade(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+
+            TextBox textBox = (TextBox)sender;
+
+            // Get the current caret position
+            int caretIndex = textBox.CaretIndex;
+
+            // Remove any existing spaces and slashes from the text
+            string text = textBox.Text.Replace(" ", "").Replace("/", "");
+
+            // Insert a space, slash, and another space after the second number
+            if (text.Length >= 2)
+            {
+                text = text.Insert(2, " / ");
+            }
+
+            // Update the TextBox text with the formatted string
+            textBox.Text = text;
+
+            // Set the caret position to the original index, adjusted for added characters
+            int adjustedCaretIndex = caretIndex + (caretIndex / 2) + 2;
+            textBox.CaretIndex = adjustedCaretIndex;
+        }
+
 
         //  <Button HorizontalAlignment = "Left" VerticalAlignment="Top" Width="450" Height="250" Margin="507,25,0,0">
         //      <StackPanel Height = "251" >

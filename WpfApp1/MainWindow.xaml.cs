@@ -143,6 +143,7 @@ namespace WpfApp1
                 string Uzvards = reader["Uzvards"].ToString();
 
                 Klienta_Logs klients = new Klienta_Logs(email, Vards, Uzvards, Status);
+                Search_page search = new Search_page(email, Vards, Uzvards);
 
                 if (dbPassword == Password && Status)
                 {
@@ -158,6 +159,11 @@ namespace WpfApp1
                     klients.AccEmail = email;
                     klients.AccVards = Vards;
                     klients.AccUzvards = Uzvards;
+
+                    search.AccEmail = email;
+                    search.AccVards = Vards;
+                    search.AccUzvards = Uzvards;
+
                     Close();
                     klients.Show();
                 }

@@ -23,10 +23,21 @@ namespace WpfApp1
         public string AccVards { get; set; }
         public string AccUzvards { get; set; }
         public bool AccStatus { get; set; }
+
+        private string email;
+        private string Vards;
+        private string Uzvards;
+
         public Klienta_Logs(string email, string Vards, string Uzvards, bool Status)
         {
             InitializeComponent();
-            MainFrame.Navigate(new Search_page());
+
+            this.email = email;
+            this.Vards = Vards;
+            this.Uzvards = Uzvards;
+
+
+            MainFrame.Navigate(new Search_page(email, Vards, Uzvards));
 
             if (!Status)
             {
@@ -53,7 +64,7 @@ namespace WpfApp1
 
         private void Search_nav(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new Search_page());
+            MainFrame.Navigate(new Search_page(email, Vards, Uzvards));
         }
 
         private void Logout(object sender, RoutedEventArgs e)
