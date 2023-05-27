@@ -65,7 +65,5 @@ C:\xampp\htdocs\Porikis_LVT_Eksamens\WpfApp1\obj\Debug\Search_page.g.cs
 C:\xampp\htdocs\Porikis_LVT_Eksamens\WpfApp1\obj\Debug\Search_page.baml
 C:\xampp\htdocs\Porikis_LVT_Eksamens\WpfApp1\obj\Debug\Home_page.g.cs
 C:\xampp\htdocs\Porikis_LVT_Eksamens\WpfApp1\obj\Debug\Home_page.baml
-C:\xampp\htdocs\Porikis_LVT_Eksamens\WpfApp1\bin\Debug\MySql.Data.dll
-C:\xampp\htdocs\Porikis_LVT_Eksamens\WpfApp1\bin\Debug\XanderUI.dll
 C:\xampp\htdocs\Porikis_LVT_Eksamens\WpfApp1\obj\Debug\Admin_page.g.cs
 C:\xampp\htdocs\Porikis_LVT_Eksamens\WpfApp1\obj\Debug\Admin_page.baml

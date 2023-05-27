@@ -25,7 +25,11 @@ namespace WpfApp1
 
         public bool Wifi = false;
         public bool Ac = false;
+        public string rat;
         public int cen;
+        public int pilna_cena;
+        public int User_ID;
+        public int Izstaba_ID;
 
         string connstring = @"server=localhost;userid=root;password=;database=Porikis;port=3306";
         public Search_page(string email, string Vards, string Uzvards)
@@ -33,7 +37,7 @@ namespace WpfApp1
             InitializeComponent();
             Search_Grid.Visibility = Visibility.Visible;
             Rezult_Grid.Visibility = Visibility.Hidden;
-            Rezervet.Visibility = Visibility.Hidden;
+            Rezerve.Visibility = Visibility.Hidden;
 
             Rezevetaja_Vards.Text = Vards;
             Rezevetaja_Uzvards.Text = Uzvards;
@@ -208,16 +212,13 @@ namespace WpfApp1
 
         private void izvele(object sender, RoutedEventArgs e)
         {
-
             Button izveleta_poga = (Button)sender;
-
             Tuple<string, string, string, string, int> buttonValues = (Tuple<string, string, string, string, int>)izveleta_poga.Tag;
-
             string Valsts = buttonValues.Item1;
             string pil = buttonValues.Item2;
             string adr = buttonValues.Item3;
             string rat = buttonValues.Item4;
-            cen = buttonValues.Item5;
+            int cen = buttonValues.Item5;
 
             R_Valsts.Text = "Valsts: " + Valsts;
             R_Pilseta.Text = "Pilsēta: " + pil;
@@ -226,15 +227,14 @@ namespace WpfApp1
             R_Cena.Text = "Cena: " + cen;
 
             Rezult_Grid.Visibility = Visibility.Hidden;
-            Rezervet.Visibility = Visibility.Visible;
-
+            Rezerve.Visibility = Visibility.Visible;
 
         }
 
         private void Atpakal_meklet(object sender, RoutedEventArgs e)
         {
             Rezult_Grid.Visibility = Visibility.Visible;
-            Rezervet.Visibility = Visibility.Hidden;
+            Rezerve.Visibility = Visibility.Hidden;
         }
 
         private void Sakum_Datumu_maina(object sender, SelectionChangedEventArgs e)
@@ -260,14 +260,19 @@ namespace WpfApp1
                 DateTime startDate = Sakum_datums.SelectedDate.Value;
                 DateTime endDate = Beigu_datums.SelectedDate.Value;
 
-                // Calculate the price based on the number of days
+                // Aprēķina Cenu ar izvēlētām dienān
                 TimeSpan duration = endDate - startDate;
                 int numberOfDays = duration.Days;
                 int pilna_cena = cen * numberOfDays;
 
-                // Display the calculated price
+                // Parāda kopējo cenu
                 R_Cena.Text = "Cena: " + pilna_cena;
             }
+        }
+        private void Nummuru_ievade(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
 
         private void Kartes_nummuru_ievade(object sender, TextCompositionEventArgs e)
@@ -277,13 +282,13 @@ namespace WpfApp1
 
             TextBox textBox = (TextBox)sender;
 
-            // Get the current caret position
+            // Iegūst tagadējo caret pozīciju
             int caretIndex = textBox.CaretIndex;
 
-            // Remove any existing spaces from the text
+            // Izņem citas eksistējošās atstarpes
             string text = textBox.Text.Replace(" ", "");
 
-            // Insert a space every fourth character
+            // Ievieto atstarpi pēc katru ceturto nummuru
             int spaceCount = text.Length / 4;
             for (int i = 1; i <= spaceCount; i++)
             {
@@ -291,10 +296,10 @@ namespace WpfApp1
                 text = text.Insert(insertPosition, " ");
             }
 
-            // Update the TextBox text with the formatted string
+            // Atjauno tekstu
             textBox.Text = text;
 
-            // Set the caret position to the original index, adjusted for added spaces
+            // Novieto Caret uz sākotnējo indeksu, kas pielāgots pievienotajām atstarpēm
             int adjustedCaretIndex = caretIndex + (caretIndex / 4);
             textBox.CaretIndex = adjustedCaretIndex;
         }
@@ -312,26 +317,123 @@ namespace WpfApp1
 
             TextBox textBox = (TextBox)sender;
 
-            // Get the current caret position
+            // Iegūst tagadējo caret pozīciju
             int caretIndex = textBox.CaretIndex;
 
-            // Remove any existing spaces and slashes from the text
+            // Noņem citas eksistējošas atstarpes un slīpsvītras no teksta
             string text = textBox.Text.Replace(" ", "").Replace("/", "");
 
-            // Insert a space, slash, and another space after the second number
+            // Ievieto " / " pēc ortā uzrakstītā nummura
             if (text.Length >= 2)
             {
                 text = text.Insert(2, " / ");
             }
 
-            // Update the TextBox text with the formatted string
+            // Atjaunina tekstu
             textBox.Text = text;
 
-            // Set the caret position to the original index, adjusted for added characters
+            // Novieto Caret uz sākotnējo indeksu, kas pielāgots pievienotajām atstarpēm
             int adjustedCaretIndex = caretIndex + (caretIndex / 2) + 2;
             textBox.CaretIndex = adjustedCaretIndex;
         }
 
+        private void Rezervet(object sender, RoutedEventArgs e)
+        {
+            int Nummurs_limits = 8;
+            int Kartes_nummura_limits = 19;
+            int Kartes_CVC_limits = 3;
+            int Kartes_termina_limits = 3;
+
+            TextBox[] rezervetie_dati = { Rezevetaja_Vards, Rezevetaja_Uzvards, Rezevetaja_Nummurs,
+                                  Rezevetaja_Epasts, Kartes_nummurs, Kartes_CVC, Kartes_datums };
+            DatePicker[] rezervetie_datumi = { Sakum_datums, Beigu_datums };
+
+            bool nav_ievadits = rezervetie_dati.Any(textBox => string.IsNullOrEmpty(textBox.Text))
+                               || rezervetie_datumi.Any(datePicker => datePicker.SelectedDate == null);
+
+            if (nav_ievadits)
+            {
+                MessageBox.Show("Nav ievadīti visi svarīgie dati!");
+                return;
+            }
+
+            if (Rezevetaja_Nummurs.Text.Length < Nummurs_limits ||
+                Kartes_nummurs.Text.Length < Kartes_nummura_limits ||
+                Kartes_CVC.Text.Length < Kartes_CVC_limits ||
+                Kartes_datums.Text.Length < Kartes_termina_limits)
+            {
+                MessageBox.Show("Kāds laukums nav līdz galam aizpildīts!");
+                return;
+            }
+
+            string Vards = Rezevetaja_Vards.Text;
+            string Uzvards = Rezevetaja_Uzvards.Text;
+            string Nummurs = Rezevetaja_Nummurs.Text;
+            string Epasts = Rezevetaja_Epasts.Text;
+            string Ratings = Rezevetaja_Epasts.Text;
+            string Konta_epasts = AccEmail;
+            int Cena = pilna_cena;
+            DateTime sakums = Sakum_datums.SelectedDate.Value;
+            DateTime beigas = Sakum_datums.SelectedDate.Value;
+            long Sakum_rezervacijas_datums = new DateTimeOffset(sakums).ToUnixTimeSeconds();
+            long Beig_rezervacijas_datums = new DateTimeOffset(beigas).ToUnixTimeSeconds();
+
+            int User_ID = 0;
+
+            using (MySqlConnection cnn = new MySqlConnection(connstring))
+            {
+                cnn.Open();
+
+                MySqlCommand userCommand = new MySqlCommand("SELECT Lietotajs_ID FROM lietotajs WHERE Email = @Email", cnn);
+                userCommand.Parameters.AddWithValue("@Email", Konta_epasts);
+
+                using (MySqlDataReader userReader = userCommand.ExecuteReader())
+                {
+                    if (userReader.Read())
+                    {
+                        User_ID = Convert.ToInt32(userReader["Lietotajs_ID"]);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid user email. Cannot create reservation.");
+                        return;
+                    }
+                }
+
+                MySqlCommand izstabaCommand = new MySqlCommand("SELECT Izstaba_ID FROM Izstaba WHERE Cena = @Cena AND Ratings = @Ratings AND AC = @AC AND Wifi = @Wifi", cnn);
+                izstabaCommand.Parameters.AddWithValue("@Cena", Cena);
+                izstabaCommand.Parameters.AddWithValue("@Ratings", rat);
+                izstabaCommand.Parameters.AddWithValue("@AC", Ac);
+                izstabaCommand.Parameters.AddWithValue("@Wifi", Wifi);
+
+                int Izstaba_ID = Convert.ToInt32(izstabaCommand.ExecuteScalar());
+                if (Izstaba_ID == 0)
+                {
+                    MessageBox.Show("No matching room found. Cannot create reservation.");
+                    return;
+                }
+
+                MySqlCommand insertCommand = new MySqlCommand("INSERT INTO Rezervacija (Check_in, Checkout, Izmaksa, Lietotajs_ID, Izstaba_ID) " +
+                                                              "VALUES (@Check_in, @Checkout, @Izmaksa, @Lietotajs_ID, @Izstaba_ID)", cnn);
+
+                insertCommand.Parameters.AddWithValue("@Check_in", Sakum_rezervacijas_datums);
+                insertCommand.Parameters.AddWithValue("@Checkout", Beig_rezervacijas_datums);
+                insertCommand.Parameters.AddWithValue("@Izmaksa", Cena);
+                insertCommand.Parameters.AddWithValue("@Lietotajs_ID", User_ID);
+                insertCommand.Parameters.AddWithValue("@Izstaba_ID", Izstaba_ID);
+
+                int ievietots = insertCommand.ExecuteNonQuery();
+
+                if (ievietots > 0)
+                {
+                    MessageBox.Show("Jūsu rezervacija ir izveidota!");
+                }
+                else
+                {
+                    MessageBox.Show("Jūsu rezervacija Netika izveidota!");
+                }
+            }
+        }
 
         //  <Button HorizontalAlignment = "Left" VerticalAlignment="Top" Width="450" Height="250" Margin="507,25,0,0">
         //      <StackPanel Height = "251" >

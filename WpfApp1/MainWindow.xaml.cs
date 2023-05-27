@@ -122,7 +122,6 @@ namespace WpfApp1
             MySqlConnection cnn;
             cnn = new MySqlConnection(connstring);
             bool Status = false;
-            bool AS = false;
             string email = "emils@gmail.com";
             string Password = "Emils123";
 
