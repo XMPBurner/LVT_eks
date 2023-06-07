@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         Title="Login" Height="550" Width="500"
@@ -17,14 +16,39 @@
     <Border Style="{StaticResource ResourceKey=Login}">
         <Grid>
 
-                <Button Content="X" HorizontalAlignment="Left" Margin="421,10,0,0" VerticalAlignment="Top" Width="30" Height="30" Click="Close"/>
-                <Button Content="-" HorizontalAlignment="Left" Margin="386,10,0,0" VerticalAlignment="Top" Width="30" Height="30" Click="Min"/>
+            <Button HorizontalAlignment="Left" Margin="421,10,0,0" VerticalAlignment="Top" Width="30" Height="30" Click="Close" FontWeight="Bold">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Ellipse Fill="#6c008f" />
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Content>
+                    <TextBlock Text="X" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Button.Content>
+            </Button>
+            
+            <Button Margin="386,10,74,500" Width="30" Height="30" Click="Min" FontSize="30" FontWeight="Bold">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Ellipse Fill="#6c008f" />
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Content>
+                    <TextBlock Text="-" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Button.Content>
+            </Button>
 
-            <Grid Name="Login_Grid" Visibility="Visible">
+            <Grid Name="Login_Grid" Visibility="Hidden">
 
                 <Image Source="/Images/Logo.png" Width="300" Height="Auto" Margin="100,50,100,337" />
 
-                <TextBlock HorizontalAlignment="Left" Height="19" Margin="139,187,0,0" TextWrapping="Wrap" Text="E-mail" VerticalAlignment="Top" Width="200" Foreground="white" TextAlignment="Center" FontSize="14"/>
+                <TextBlock HorizontalAlignment="Left" Height="19" Margin="139,187,0,0" TextWrapping="Wrap" Text="E-pasts" VerticalAlignment="Top" Width="200" Foreground="white" TextAlignment="Center" FontSize="14"/>
                 <TextBox x:Name="epasts" Padding="3" HorizontalAlignment="Left" Height="30" Margin="139,205,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Style="{StaticResource ResourceKey=Login_TextBox}">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -33,7 +57,7 @@
                     </TextBox.Resources>
                 </TextBox>
 
-                <TextBlock HorizontalAlignment="Left" Height="19" Margin="139,254,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="200" Foreground="white" TextAlignment="Center" FontSize="14"/>
+                <TextBlock HorizontalAlignment="Left" Height="19" Margin="139,254,0,0" TextWrapping="Wrap" Text="Parole" VerticalAlignment="Top" Width="200" Foreground="white" TextAlignment="Center" FontSize="14"/>
                 <PasswordBox x:Name="password" KeyDown="KeyLogin" Padding="3" HorizontalAlignment="Left" Height="30" Margin="139,273,0,0" VerticalAlignment="Top" Width="200" Style="{StaticResource ResourceKey=Login_Password}">
                     <PasswordBox.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -49,7 +73,7 @@
                     </PasswordBox.Template>
                 </PasswordBox>
 
-                <Button x:Name="Pieslegties" Click="BtnLogin" Content="Pieslēgties" HorizontalAlignment="Left" Margin="191,317,0,0" VerticalAlignment="Top" Width="100"/>
+                <Button x:Name="Pieslegties" Click="BtnLogin" Content="Pieslēgties" HorizontalAlignment="Left" Margin="191,317,0,0" VerticalAlignment="Top" Width="100" Height="29" Foreground="White" Style="{StaticResource ResourceKey=Button_style}"/>
 
                 <Button Content="Auto connect" HorizontalAlignment="Left" Margin="52,436,0,0" VerticalAlignment="Top" Width="144" Height="50" Click="AUTO_CONNECT"/>
 
@@ -62,9 +86,9 @@
 
             </Grid>
 
-            <Grid Name="Create_Grid" Visibility="Hidden">
+            <Grid Name="Create_Grid" Visibility="Visible">
 
-                <TextBox x:Name="Vards" Padding="3" HorizontalAlignment="Left" Height="30" Margin="77,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Style="{StaticResource ResourceKey=Login_TextBox}">
+                <TextBox x:Name="Vards" Padding="3" HorizontalAlignment="Left" Height="30" Margin="76,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Style="{StaticResource ResourceKey=Login_TextBox}">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="15"/>
@@ -72,7 +96,7 @@
                 </TextBox.Resources>
                 </TextBox>
 
-                <TextBox x:Name="Uzvards" Padding="3" HorizontalAlignment="Left" Height="30" Margin="77,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Style="{StaticResource ResourceKey=Login_TextBox}">
+                <TextBox x:Name="Uzvards" Padding="3" HorizontalAlignment="Left" Height="30" Margin="265,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Style="{StaticResource ResourceKey=Login_TextBox}">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="15"/>
@@ -80,7 +104,7 @@
                 </TextBox.Resources>
                 </TextBox>
 
-                <TextBox x:Name="Nummurs" Padding="3" HorizontalAlignment="Left" Height="30" Margin="77,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" MaxLength="8" PreviewTextInput="Nummuru_Ievade" Style="{StaticResource ResourceKey=Login_TextBox}">
+                <TextBox x:Name="Nummurs" Padding="3" HorizontalAlignment="Left" Height="30" Margin="76,206,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" MaxLength="8" PreviewTextInput="Nummuru_Ievade" Style="{StaticResource ResourceKey=Login_TextBox}">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="15"/>
@@ -88,7 +112,7 @@
                 </TextBox.Resources>
                 </TextBox>
 
-                <TextBox x:Name="Epasts" Padding="3" HorizontalAlignment="Left" Height="30" Margin="77,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Style="{StaticResource ResourceKey=Login_TextBox}">
+                <TextBox x:Name="Epasts" Padding="3" HorizontalAlignment="Left" Height="30" Margin="265,206,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Style="{StaticResource ResourceKey=Login_TextBox}">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="15"/>
@@ -96,7 +120,7 @@
                 </TextBox.Resources>
                 </TextBox>
 
-                <PasswordBox x:Name="Parole" Padding="3" HorizontalAlignment="Left" Height="30" Margin="77,298,0,0" VerticalAlignment="Top" Width="150" Style="{StaticResource ResourceKey=Login_Password}">
+                <PasswordBox x:Name="Parole" Padding="3" HorizontalAlignment="Left" Height="30" Margin="76,294,0,0" VerticalAlignment="Top" Width="150" Style="{StaticResource ResourceKey=Login_Password}">
                     <PasswordBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>
@@ -111,14 +135,14 @@
                     </PasswordBox.Template>
                 </PasswordBox>
 
-                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="265,131,0,0" TextWrapping="Wrap" Text="Vārds" VerticalAlignment="Top"/>
-                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="265,166,0,0" TextWrapping="Wrap" Text="Uzvāds" VerticalAlignment="Top"/>
-                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="265,217,0,0" TextWrapping="Wrap" Text="Nummurs" VerticalAlignment="Top"/>
-                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="265,255,0,0" TextWrapping="Wrap" Text="E-pasts" VerticalAlignment="Top"/>
-                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="265,305,0,0" TextWrapping="Wrap" Text="Parole" VerticalAlignment="Top"/>
-                
-                <Button Content="Atpakaļ" HorizontalAlignment="Left" Margin="92,413,0,0" VerticalAlignment="Top" Width="121" Height="52" Click="Atpakaļ"/>
-                <Button Content="Izveidot" HorizontalAlignment="Left" Margin="265,413,0,0" VerticalAlignment="Top" Width="121" Height="52" Click="Izveidot"/>
+                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="139,101,0,0" TextWrapping="Wrap" Text="Vārds" VerticalAlignment="Top"/>
+                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="321,101,0,0" TextWrapping="Wrap" Text="Uzvāds" VerticalAlignment="Top"/>
+                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="126,185,0,0" TextWrapping="Wrap" Text="Numurs" VerticalAlignment="Top"/>
+                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="320,188,0,0" TextWrapping="Wrap" Text="E-pasts" VerticalAlignment="Top"/>
+                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="135,273,0,0" TextWrapping="Wrap" Text="Parole" VerticalAlignment="Top"/>
+
+                <Button Content="Atpakaļ" HorizontalAlignment="Left" Margin="92,413,0,0" VerticalAlignment="Top" Width="121" Height="52" Click="Atpakaļ" Foreground="White" Style="{StaticResource ResourceKey=Button_style}"/>
+                <Button Content="Izveidot" HorizontalAlignment="Left" Margin="265,413,0,0" VerticalAlignment="Top" Width="121" Height="52" Click="Izveidot" Foreground="White" Style="{StaticResource ResourceKey=Button_style}"/>
 
             </Grid>
         </Grid>

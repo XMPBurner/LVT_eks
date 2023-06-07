@@ -9,25 +9,27 @@
       Title="Admin_page"
       Background="#FF404040">
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <Grid>
-            <TextBlock HorizontalAlignment="Left" Margin="324,24,0,0" TextWrapping="Wrap" Text="ADMIN PAGE" VerticalAlignment="Top" Height="88" Width="338" Foreground="White" FontSize="50"/>
-            <Button Content="Lietotāji" HorizontalAlignment="Left" Margin="126,133,0,0" VerticalAlignment="Top" Width="75" Click="DB_lietotaji"/>
+    <Border Style="{StaticResource ResourceKey=Klientu_lapas}" Margin="-10,0,0,0">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <TextBlock HorizontalAlignment="center" Margin="240,22,217,0" TextWrapping="Wrap" Text="Administrātora panelis" VerticalAlignment="Top" Height="88" Width="510" Foreground="White" FontSize="50"/>
+                <Button Content="Lietotāji" HorizontalAlignment="Left" Margin="126,133,0,0" VerticalAlignment="Top" Width="75" Click="DB_lietotaji"/>
+                <Button Content="Rezervācija" HorizontalAlignment="Left" Margin="231,133,0,0" VerticalAlignment="Top" Width="75" Click="DB_rezervacija"/>
 
-
-            <Grid x:Name="DB_Table" Margin="0,158,0,0">
-                <DataGrid x:Name="Data_Table" AutoGenerateColumns="True" Margin="10">
-                    <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="Delete">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button Content="Delete" Click="Delete_row"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <Grid x:Name="DB_Table" Margin="0,158,0,0">
+                    <DataGrid x:Name="Data_Table" AutoGenerateColumns="True" Margin="10">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Delete">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Delete" Click="Delete_row"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
             </Grid>
-        </Grid>
-    </ScrollViewer>
+        </ScrollViewer>
+    </Border>
 </Page>

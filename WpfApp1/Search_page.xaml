@@ -7,20 +7,21 @@
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
       xmlns:hc="https://handyorg.github.io/handycontrol" x:Class="WpfApp1.Search_page"
       mc:Ignorable="d" 
-      d:DesignHeight="709" d:DesignWidth="967"
+      d:DesignHeight="709" d:DesignWidth="1000"
       Title="Search_page"
-      Background="#FF404040">
+      Background="Transparent">
 
+    <Border Style="{StaticResource ResourceKey=Klientu_lapas}" Margin="-10,0,0,0">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid>
-            <Grid x:Name="Search_Grid" Visibility="Hidden">
+            <Grid x:Name="Search_Grid" Visibility="Visible">
 
-                <TextBlock HorizontalAlignment="Left" Foreground="White" FontWeight="Bold" FontSize="40" Margin="308,44,0,0" TextWrapping="Wrap" Text="Vienīču meklēšana" VerticalAlignment="Top"/>
+                <TextBlock HorizontalAlignment="Left" Foreground="White" FontWeight="Bold" FontSize="40" Margin="308,44,0,0" TextWrapping="Wrap" Text="Viesnīcu Meklēšana" VerticalAlignment="Top" Width="394"/>
 
-                <CheckBox x:Name="WIFI" Content="WIFI" HorizontalAlignment="Left" Foreground="White" Margin="266,181,0,0" VerticalAlignment="Top" ClickMode="Press" Checked="WIFI_ir" Unchecked="WIFI_nav"/>
-                <CheckBox x:Name="AC" Content="AC" HorizontalAlignment="Left" Foreground="White" Margin="266,166,0,0" VerticalAlignment="Top" ClickMode="Press" Checked="AC_ir" Unchecked="AC_nav"/>
+                <CheckBox x:Name="WIFI" Content="WIFI" HorizontalAlignment="Left" Foreground="White" Margin="239,181,0,0" VerticalAlignment="Top" ClickMode="Press" Checked="WIFI_ir" Unchecked="WIFI_nav"/>
+                <CheckBox x:Name="AC" Content="Kondicunieris" HorizontalAlignment="Left" Foreground="White" Margin="239,164,0,0" VerticalAlignment="Top" ClickMode="Press" Checked="AC_ir" Unchecked="AC_nav"/>
 
-                <TextBlock HorizontalAlignment="Left" Margin="111,132,0,0" TextWrapping="Wrap" Foreground="White" Text="Valsts" VerticalAlignment="Top" Height="29" Width="73"/>
+                <TextBlock HorizontalAlignment="Left" Margin="111,132,0,0" TextWrapping="Wrap" Foreground="White" Text="Valsts" VerticalAlignment="Top" Height="24" Width="35"/>
                 <TextBlock HorizontalAlignment="Left" Margin="400,132,0,0" TextWrapping="Wrap" Foreground="White" Text="Skaits" VerticalAlignment="Top" Height="29" Width="73"/>
 
                 <Button x:Name="Valsts_poga" Click="Country_select" Content="Izvēlaties valsti" HorizontalAlignment="Left" Margin="84,161,0,0" VerticalAlignment="Top" Width="100"/>
@@ -31,7 +32,7 @@
                     <ListBoxItem Content="Krievija"/>
                 </ListBox>
 
-                <Button x:Name="Skaits_poga" Click="Skaits_select" Content="Izvēlaties skaits" HorizontalAlignment="Left" Margin="366,161,0,0" VerticalAlignment="Top" Width="100"/>
+                <Button x:Name="Skaits_poga" Click="Skaits_select" Content="Izvēlaties skaitu" HorizontalAlignment="Left" Margin="366,161,0,0" VerticalAlignment="Top" Width="100"/>
                 <ListBox x:Name="Skaits_izvēle" Visibility="Collapsed" HorizontalAlignment="Left" Height="100" Margin="366,181,0,0" VerticalAlignment="Top" Width="100" SelectionChanged="Skaitu_izvēles_maiņa">
                     <ListBoxItem Content="1"/>
                     <ListBoxItem Content="2"/>
@@ -39,13 +40,13 @@
                     <ListBoxItem Content="4"/>
                 </ListBox>
 
-                <Button Content="Search" HorizontalAlignment="Left" Margin="505,147,0,0" VerticalAlignment="Top" Width="124" Height="64" Click="Search"/>
+                <Button Content="Meklēt" HorizontalAlignment="Left" Margin="505,147,0,0" VerticalAlignment="Top" Width="124" Height="64" Click="Search" />
 
             </Grid>
 
             <Grid x:Name="Rezult_Grid"/>
 
-            <Grid x:Name="Rezerve">
+            <Grid x:Name="Rezerve" Visibility="Hidden">
                 <TextBlock x:Name="R_Valsts" Foreground="White" HorizontalAlignment="Left" Margin="74,380,0,0" TextWrapping="Wrap" Text="Valsts" VerticalAlignment="Top" Height="22" Width="139"/>
                 <Button Content="Atpakaļ" HorizontalAlignment="Left" Margin="125,595,0,0" VerticalAlignment="Top" Width="315" Height="69" Click="Atpakal_meklet"/>
                 <Button Content="Rezervēt" HorizontalAlignment="Left" Margin="518,595,0,0" VerticalAlignment="Top" Width="330" Height="69" Click="Rezervet"/>
@@ -59,7 +60,7 @@
                 <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="253,380,0,0" TextWrapping="Wrap" Text="Vārds" VerticalAlignment="Top" Height="22" Width="54"/>
                 <TextBox x:Name="Rezevetaja_Vards" HorizontalAlignment="Left" Height="23" Margin="218,402,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                 <TextBox x:Name="Rezevetaja_Epasts" HorizontalAlignment="Left" Height="23" Margin="218,456,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="253,479,0,0" TextWrapping="Wrap" Text="Nummurs" VerticalAlignment="Top" Height="22" Width="54"/>
+                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="253,479,0,0" TextWrapping="Wrap" Text="Numurs" VerticalAlignment="Top" Height="22" Width="54"/>
                 <TextBox x:Name="Rezevetaja_Nummurs" MaxLength="8" HorizontalAlignment="Left" Height="23" Margin="218,501,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="Nummuru_ievade"/>
                 <TextBox x:Name="Kartes_datums" MaxLength="7" HorizontalAlignment="Left" Height="23" Margin="628,478,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="Kartes_terminu_ievade"/>
 
@@ -80,4 +81,5 @@
             </Grid>
         </Grid>
     </ScrollViewer>
+    </Border>
 </Page>

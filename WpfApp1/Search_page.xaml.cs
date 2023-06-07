@@ -26,6 +26,7 @@ namespace WpfApp1
         public bool Wifi = false;
         public bool Ac = false;
         public string rat;
+        public string Konta_epasts;
         public int cen;
         public int pilna_cena;
         public int User_ID;
@@ -42,6 +43,8 @@ namespace WpfApp1
             Rezevetaja_Vards.Text = Vards;
             Rezevetaja_Uzvards.Text = Uzvards;
             Rezevetaja_Epasts.Text = email;
+
+            Konta_epasts = email;
         }
 
         private void Country_select(object sender, RoutedEventArgs e)
@@ -102,8 +105,6 @@ namespace WpfApp1
 
         private void Search(object sender, RoutedEventArgs e)
         {
-            Search_Grid.Visibility = Visibility.Hidden;
-            Rezult_Grid.Visibility = Visibility.Visible;
 
             MySqlConnection cnn;
             cnn = new MySqlConnection(connstring);
@@ -134,6 +135,9 @@ namespace WpfApp1
 
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
+
+                    Search_Grid.Visibility = Visibility.Hidden;
+                    Rezult_Grid.Visibility = Visibility.Visible;
 
                     for (int i = 0; i < (count + 1) / 2; i++)
                     {
@@ -205,7 +209,7 @@ namespace WpfApp1
             }
             else
             {
-                MessageBox.Show("Kautkas neiet");
+                MessageBox.Show("Pēc nosacijumiem nevarējam atrast rezervācijas vietu!");
             }
             cnn.Close();
         }
@@ -263,7 +267,7 @@ namespace WpfApp1
                 // Aprēķina Cenu ar izvēlētām dienān
                 TimeSpan duration = endDate - startDate;
                 int numberOfDays = duration.Days;
-                int pilna_cena = cen * numberOfDays;
+                pilna_cena = cen * numberOfDays;
 
                 // Parāda kopējo cenu
                 R_Cena.Text = "Cena: " + pilna_cena;
@@ -371,7 +375,6 @@ namespace WpfApp1
             string Nummurs = Rezevetaja_Nummurs.Text;
             string Epasts = Rezevetaja_Epasts.Text;
             string Ratings = Rezevetaja_Epasts.Text;
-            string Konta_epasts = AccEmail;
             int Cena = pilna_cena;
             DateTime sakums = Sakum_datums.SelectedDate.Value;
             DateTime beigas = Sakum_datums.SelectedDate.Value;
@@ -401,10 +404,10 @@ namespace WpfApp1
                 }
 
                 MySqlCommand izstabaCommand = new MySqlCommand("SELECT Izstaba_ID FROM Izstaba WHERE Cena = @Cena AND Ratings = @Ratings AND AC = @AC AND Wifi = @Wifi", cnn);
-                izstabaCommand.Parameters.AddWithValue("@Cena", Cena);
-                izstabaCommand.Parameters.AddWithValue("@Ratings", rat);
-                izstabaCommand.Parameters.AddWithValue("@AC", Ac);
-                izstabaCommand.Parameters.AddWithValue("@Wifi", Wifi);
+                izstabaCommand.Parameters.AddWithValue("@Cena", 25);
+                izstabaCommand.Parameters.AddWithValue("@Ratings", 2);
+                izstabaCommand.Parameters.AddWithValue("@AC", true);
+                izstabaCommand.Parameters.AddWithValue("@Wifi", true);
 
                 int Izstaba_ID = Convert.ToInt32(izstabaCommand.ExecuteScalar());
                 if (Izstaba_ID == 0)
@@ -414,10 +417,10 @@ namespace WpfApp1
                 }
 
                 MySqlCommand insertCommand = new MySqlCommand("INSERT INTO Rezervacija (Check_in, Checkout, Izmaksa, Lietotajs_ID, Izstaba_ID) " +
-                                                              "VALUES (@Check_in, @Checkout, @Izmaksa, @Lietotajs_ID, @Izstaba_ID)", cnn);
+                                                      "VALUES (@Check_in, @Checkout, @Izmaksa, @Lietotajs_ID, @Izstaba_ID)", cnn);
 
-                insertCommand.Parameters.AddWithValue("@Check_in", Sakum_rezervacijas_datums);
-                insertCommand.Parameters.AddWithValue("@Checkout", Beig_rezervacijas_datums);
+                insertCommand.Parameters.Add("@Check_in", MySqlDbType.DateTime).Value = Sakum_rezervacijas_datums;
+                insertCommand.Parameters.Add("@Checkout", MySqlDbType.DateTime).Value = Beig_rezervacijas_datums;
                 insertCommand.Parameters.AddWithValue("@Izmaksa", Cena);
                 insertCommand.Parameters.AddWithValue("@Lietotajs_ID", User_ID);
                 insertCommand.Parameters.AddWithValue("@Izstaba_ID", Izstaba_ID);

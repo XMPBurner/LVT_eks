@@ -17,9 +17,6 @@ using System.Data;
 
 namespace WpfApp1
 {
-    /// <summary>
-    /// Interaction logic for Admin_page.xaml
-    /// </summary>
     public partial class Admin_page : Page
     {
         public Admin_page()
@@ -45,6 +42,32 @@ namespace WpfApp1
             cnn.Open();
 
             MySqlCommand command = new MySqlCommand("SELECT Vards, Uzvards, Email, Nummurs FROM lietotajs", cnn);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+            DataTable Datu_tabula = new DataTable();
+
+            adapter.Fill(Datu_tabula);
+
+            return Datu_tabula;
+        }
+
+        private void DB_rezervacija(object sender, RoutedEventArgs e)
+        {
+            Datu_tabula = DB_rezervacija();
+            Data_Table.ItemsSource = Datu_tabula.DefaultView;
+        }
+
+        private DataTable DB_rezervacija()
+        {
+            MySqlConnection cnn;
+            cnn = new MySqlConnection(connstring);
+
+            cnn.Open();
+
+            MySqlCommand command = new MySqlCommand("SELECT Rezervacija_ID, DATE_FORMAT(Check_in, '%Y-%m-%d %H:%i:%s') AS `Sākums datums`, " +
+                                                    "DATE_FORMAT(Checkout, '%Y-%m-%d %H:%i:%s') AS `Beigu datums`, " +
+                                                    "Izmaksa, Lietotajs_ID, Izstaba_ID " +
+                                                    "FROM rezervacija", cnn);
+
             MySqlDataAdapter adapter = new MySqlDataAdapter(command);
             DataTable Datu_tabula = new DataTable();
 
