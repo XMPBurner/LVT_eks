@@ -52,7 +52,7 @@ namespace WpfApp1 {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/WpfApp1;component/home_page.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Naktsmītne;component/home_page.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\Home_page.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Configuration;
 using System.Text.RegularExpressions;
 using MySql.Data.MySqlClient;
 
@@ -57,6 +47,7 @@ namespace WpfApp1
             Login();
         }
 
+        // Klientu ierakstīšanās
         private void Login()
         {
             MySqlConnection cnn;
@@ -65,12 +56,11 @@ namespace WpfApp1
             string email = epasts.Text;
             string Password = password.Password;
 
-            cnn.Open();
+            cnn.Open(); // Atver datu bāzes savienojumu
 
             MySqlCommand command = new MySqlCommand("SELECT * FROM lietotajs WHERE Email=@email", cnn);
             command.Parameters.AddWithValue("@email", email);
 
-            // Execute the query and read the results
             MySqlDataReader reader = command.ExecuteReader();
 
             if (reader.Read())
@@ -83,16 +73,15 @@ namespace WpfApp1
 
                 Klienta_Logs klients = new Klienta_Logs(email, Vards, Uzvards, Status);
 
-                if (dbPassword == Password && Status)
+                if (dbPassword == Password && Status) // Ja ievadītā parole sakrīt ar datu bāzes paroli un statuss ir "true"
                 {
                     klients.AccEmail = email;
                     klients.AccVards = Vards;
                     klients.AccUzvards = Uzvards;
-                    klients.AccStatus = Status;
                     Close();
                     klients.Show();
                 }
-                else if (dbPassword == Password)
+                else if (dbPassword == Password) // Ja ievadītā parole sakrīt ar datu bāzes paroli
                 {
                     klients.AccEmail = email;
                     klients.AccVards = Vards;
@@ -114,7 +103,7 @@ namespace WpfApp1
             password.Password = string.Empty;
             reader.Close();
             command.Dispose();
-            cnn.Close(); // always close connection }
+            cnn.Close();
             
         }
         private void AUTO_CONNECT(object sender, RoutedEventArgs e)   //AUTO CONNECT: JADZĒŠ ĀRĀ PĒCTAM
@@ -239,7 +228,6 @@ namespace WpfApp1
             MySqlCommand command = new MySqlCommand("SELECT * FROM lietotajs WHERE Email=@email", cnn);
             command.Parameters.AddWithValue("@email", Epasts_j);
 
-            // Execute the query and read the results
             MySqlDataReader reader = command.ExecuteReader();
 
             if (reader.Read())

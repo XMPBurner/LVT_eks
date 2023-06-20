@@ -12,74 +12,74 @@
       Background="Transparent">
 
     <Border Style="{StaticResource ResourceKey=Klientu_lapas}" Margin="-10,0,0,0">
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <Grid>
-            <Grid x:Name="Search_Grid" Visibility="Visible">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid x:Name="Search_Grid" Visibility="Visible">
 
-                <TextBlock HorizontalAlignment="Left" Foreground="White" FontWeight="Bold" FontSize="40" Margin="308,44,0,0" TextWrapping="Wrap" Text="Viesnīcu Meklēšana" VerticalAlignment="Top" Width="394"/>
+                    <TextBlock HorizontalAlignment="Left" Foreground="White" FontWeight="Bold" FontSize="40" Margin="308,44,0,0" TextWrapping="Wrap" Text="Viesnīcu Meklēšana" VerticalAlignment="Top" Width="394"/>
 
-                <CheckBox x:Name="WIFI" Content="WIFI" HorizontalAlignment="Left" Foreground="White" Margin="239,181,0,0" VerticalAlignment="Top" ClickMode="Press" Checked="WIFI_ir" Unchecked="WIFI_nav"/>
-                <CheckBox x:Name="AC" Content="Kondicunieris" HorizontalAlignment="Left" Foreground="White" Margin="239,164,0,0" VerticalAlignment="Top" ClickMode="Press" Checked="AC_ir" Unchecked="AC_nav"/>
+                    <CheckBox x:Name="WIFI" Content="WIFI" HorizontalAlignment="Left" Foreground="White" Margin="239,181,0,0" VerticalAlignment="Top" ClickMode="Press" Checked="WIFI_ir" Unchecked="WIFI_nav"/>
+                    <CheckBox x:Name="AC" Content="Kondicunieris" HorizontalAlignment="Left" Foreground="White" Margin="239,166,0,0" VerticalAlignment="Top" ClickMode="Press" Checked="AC_ir" Unchecked="AC_nav"/>
 
-                <TextBlock HorizontalAlignment="Left" Margin="111,132,0,0" TextWrapping="Wrap" Foreground="White" Text="Valsts" VerticalAlignment="Top" Height="24" Width="35"/>
-                <TextBlock HorizontalAlignment="Left" Margin="400,132,0,0" TextWrapping="Wrap" Foreground="White" Text="Skaits" VerticalAlignment="Top" Height="29" Width="73"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="111,132,0,0" TextWrapping="Wrap" Foreground="White" Text="Valsts" VerticalAlignment="Top" Height="24" Width="35"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="400,132,0,0" TextWrapping="Wrap" Foreground="White" Text="Skaits" VerticalAlignment="Top" Height="29" Width="73"/>
 
-                <Button x:Name="Valsts_poga" Click="Country_select" Content="Izvēlaties valsti" HorizontalAlignment="Left" Margin="84,161,0,0" VerticalAlignment="Top" Width="100"/>
-                <ListBox x:Name="Valsts_izvēle" Visibility="Collapsed" HorizontalAlignment="Left" Height="100" Margin="84,181,0,0" VerticalAlignment="Top" Width="100" SelectionChanged="Valsts_izvēles_maiņa">
-                    <ListBoxItem Content="Latvija"/>
-                    <ListBoxItem Content="Lietuva"/>
-                    <ListBoxItem Content="Igaunija"/>
-                    <ListBoxItem Content="Krievija"/>
-                </ListBox>
+                    <Button x:Name="Valsts_poga" Click="Country_select" Content="Izvēlaties valsti" HorizontalAlignment="Left" Margin="84,161,0,0" VerticalAlignment="Top" Width="100"/>
+                    <ListBox x:Name="Valsts_izvēle" Visibility="Collapsed" HorizontalAlignment="Left" Height="100" Margin="84,179,0,0" VerticalAlignment="Top" Width="100" SelectionChanged="Valsts_izvēles_maiņa">
+                        <ListBoxItem Content="Latvija"/>
+                        <ListBoxItem Content="Lietuva"/>
+                        <ListBoxItem Content="Igaunija"/>
+                        <ListBoxItem Content="Krievija"/>
+                    </ListBox>
 
-                <Button x:Name="Skaits_poga" Click="Skaits_select" Content="Izvēlaties skaitu" HorizontalAlignment="Left" Margin="366,161,0,0" VerticalAlignment="Top" Width="100"/>
-                <ListBox x:Name="Skaits_izvēle" Visibility="Collapsed" HorizontalAlignment="Left" Height="100" Margin="366,181,0,0" VerticalAlignment="Top" Width="100" SelectionChanged="Skaitu_izvēles_maiņa">
-                    <ListBoxItem Content="1"/>
-                    <ListBoxItem Content="2"/>
-                    <ListBoxItem Content="3"/>
-                    <ListBoxItem Content="4"/>
-                </ListBox>
+                    <Button x:Name="Skaits_poga" Click="Skaits_select" Content="Izvēlaties skaitu" HorizontalAlignment="Left" Margin="366,161,0,0" VerticalAlignment="Top" Width="100"/>
+                    <ListBox x:Name="Skaits_izvēle" Visibility="Collapsed" HorizontalAlignment="Left" Height="100" Margin="366,181,0,0" VerticalAlignment="Top" Width="100" SelectionChanged="Skaitu_izvēles_maiņa">
+                        <ListBoxItem Content="1"/>
+                        <ListBoxItem Content="2"/>
+                        <ListBoxItem Content="3"/>
+                        <ListBoxItem Content="4"/>
+                    </ListBox>
 
-                <Button Content="Meklēt" HorizontalAlignment="Left" Margin="505,147,0,0" VerticalAlignment="Top" Width="124" Height="64" Click="Search" />
+                    <Button Content="Meklēt" HorizontalAlignment="Left" Margin="547,166,0,0" VerticalAlignment="Top" Width="186" Height="74" Click="Search" Foreground="White" Style="{StaticResource ResourceKey=Button_style}"/>
 
+                </Grid>
+
+                <Grid x:Name="Rezult_Grid"/>
+
+                <Grid x:Name="Rezerve" Visibility="Hidden">
+                    <TextBlock x:Name="R_Valsts" Foreground="White" HorizontalAlignment="Left" Margin="74,380,0,0" TextWrapping="Wrap" Text="Valsts" VerticalAlignment="Top" Height="22" Width="139"/>
+                    <Button Content="Atpakaļ" HorizontalAlignment="Left" Margin="125,595,0,0" VerticalAlignment="Top" Width="315" Height="69" Click="Atpakal_meklet"/>
+                    <Button Content="Rezervēt" HorizontalAlignment="Left" Margin="518,595,0,0" VerticalAlignment="Top" Width="330" Height="69" Click="Rezervet"/>
+                    <TextBlock x:Name="R_Pilseta" Foreground="White" HorizontalAlignment="Left" Margin="75,407,0,0" TextWrapping="Wrap" Text="Pilsēta" VerticalAlignment="Top" Height="22" Width="138"/>
+                    <TextBlock x:Name="R_Adresse" Foreground="White" HorizontalAlignment="Left" Margin="75,434,0,0" TextWrapping="Wrap" Text="Nosaukums" VerticalAlignment="Top" Height="22" Width="138" RenderTransformOrigin="0.5,0.5"/>
+                    <TextBlock x:Name="R_Skaits" Foreground="White" HorizontalAlignment="Left" Margin="74,461,0,0" TextWrapping="Wrap" Text="skaits" VerticalAlignment="Top" Height="22" Width="144"/>
+                    <TextBlock x:Name="R_Ratings" Foreground="White" HorizontalAlignment="Left" Margin="75,488,0,0" TextWrapping="Wrap" Text="Ratings" VerticalAlignment="Top" Height="22" Width="138"/>
+                    <TextBlock x:Name="R_Cena" Foreground="White" HorizontalAlignment="Left" Margin="75,515,0,0" TextWrapping="Wrap" Text="Cena:" VerticalAlignment="Top" Height="22" Width="138"/>
+                    <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="253,434,0,0" TextWrapping="Wrap" Text="E-Pasts" VerticalAlignment="Top" Height="22" Width="54"/>
+                    <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="490,380,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" Width="54"/>
+                    <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="253,380,0,0" TextWrapping="Wrap" Text="Vārds" VerticalAlignment="Top" Height="22" Width="54"/>
+                    <TextBox x:Name="Rezevetaja_Vards" HorizontalAlignment="Left" Height="23" Margin="218,402,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="Rezevetaja_Epasts" HorizontalAlignment="Left" Height="23" Margin="218,456,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="253,479,0,0" TextWrapping="Wrap" Text="Numurs" VerticalAlignment="Top" Height="22" Width="54"/>
+                    <TextBox x:Name="Rezevetaja_Numurs" MaxLength="8" HorizontalAlignment="Left" Height="23" Margin="218,501,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="Numuru_ievade"/>
+                    <TextBox x:Name="Kartes_datums" MaxLength="7" HorizontalAlignment="Left" Height="23" Margin="628,478,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="Kartes_terminu_ievade"/>
+
+                    <TextBox x:Name="Kartes_CVC" MaxLength="3" HorizontalAlignment="Left" Height="23" Margin="628,434,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="Kartes_CVC_ievade"/>
+                    <TextBox x:Name="Kartes_numurs" MaxLength="19" HorizontalAlignment="Left" Height="23" Margin="518,402,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" PreviewTextInput="Kartes_numuru_ievade"/>
+                    <TextBox x:Name="Rezevetaja_Uzvards" HorizontalAlignment="Left" Height="23" Margin="355,402,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+                    <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="386,380,0,0" TextWrapping="Wrap" Text="Uzvārds" VerticalAlignment="Top" Height="22" Width="54"/>
+
+                    <DatePicker x:Name="Sakum_datums" SelectedDateChanged="Sakum_Datumu_maina" DisplayDateStart="{x:Static sys:DateTime.Today}" HorizontalAlignment="Left" Margin="355,455,0,0" VerticalAlignment="Top" Width="120"/>
+                    <DatePicker x:Name="Beigu_datums" SelectedDateChanged="Beigu_Datumu_maina" HorizontalAlignment="Left" Margin="355,501,0,0" VerticalAlignment="Top" Width="120"/>
+                    <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="386,433,0,0" TextWrapping="Wrap" Text="Sākums" VerticalAlignment="Top" Height="22" Width="54"/>
+                    <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="386,479,0,0" TextWrapping="Wrap" Text="Beigas" VerticalAlignment="Top" Height="22" Width="54"/>
+                    <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="780,434,0,0" TextWrapping="Wrap" Text="CVC2" VerticalAlignment="Top" Height="22" Width="54"/>
+                    <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="780,402,0,0" TextWrapping="Wrap" Text="Kartes nummurs" VerticalAlignment="Top" Height="22" Width="101"/>
+                    <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="780,479,0,0" TextWrapping="Wrap" Text="Kartes termiņš" VerticalAlignment="Top" Height="22" Width="81"/>
+
+                </Grid>
             </Grid>
-
-            <Grid x:Name="Rezult_Grid"/>
-
-            <Grid x:Name="Rezerve" Visibility="Hidden">
-                <TextBlock x:Name="R_Valsts" Foreground="White" HorizontalAlignment="Left" Margin="74,380,0,0" TextWrapping="Wrap" Text="Valsts" VerticalAlignment="Top" Height="22" Width="139"/>
-                <Button Content="Atpakaļ" HorizontalAlignment="Left" Margin="125,595,0,0" VerticalAlignment="Top" Width="315" Height="69" Click="Atpakal_meklet"/>
-                <Button Content="Rezervēt" HorizontalAlignment="Left" Margin="518,595,0,0" VerticalAlignment="Top" Width="330" Height="69" Click="Rezervet"/>
-                <TextBlock x:Name="R_Pilseta" Foreground="White" HorizontalAlignment="Left" Margin="75,407,0,0" TextWrapping="Wrap" Text="Pilsēta" VerticalAlignment="Top" Height="22" Width="138"/>
-                <TextBlock x:Name="R_Adresse" Foreground="White" HorizontalAlignment="Left" Margin="75,434,0,0" TextWrapping="Wrap" Text="Nosaukums" VerticalAlignment="Top" Height="22" Width="138" RenderTransformOrigin="0.5,0.5"/>
-                <TextBlock x:Name="R_Skaits" Foreground="White" HorizontalAlignment="Left" Margin="74,461,0,0" TextWrapping="Wrap" Text="skaits" VerticalAlignment="Top" Height="22" Width="144"/>
-                <TextBlock x:Name="R_Ratings" Foreground="White" HorizontalAlignment="Left" Margin="75,488,0,0" TextWrapping="Wrap" Text="Ratings" VerticalAlignment="Top" Height="22" Width="138"/>
-                <TextBlock x:Name="R_Cena" Foreground="White" HorizontalAlignment="Left" Margin="75,515,0,0" TextWrapping="Wrap" Text="Cena:" VerticalAlignment="Top" Height="22" Width="138"/>
-                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="253,434,0,0" TextWrapping="Wrap" Text="E-Pasts" VerticalAlignment="Top" Height="22" Width="54"/>
-                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="490,380,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" Width="54"/>
-                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="253,380,0,0" TextWrapping="Wrap" Text="Vārds" VerticalAlignment="Top" Height="22" Width="54"/>
-                <TextBox x:Name="Rezevetaja_Vards" HorizontalAlignment="Left" Height="23" Margin="218,402,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                <TextBox x:Name="Rezevetaja_Epasts" HorizontalAlignment="Left" Height="23" Margin="218,456,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="253,479,0,0" TextWrapping="Wrap" Text="Numurs" VerticalAlignment="Top" Height="22" Width="54"/>
-                <TextBox x:Name="Rezevetaja_Nummurs" MaxLength="8" HorizontalAlignment="Left" Height="23" Margin="218,501,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="Nummuru_ievade"/>
-                <TextBox x:Name="Kartes_datums" MaxLength="7" HorizontalAlignment="Left" Height="23" Margin="628,478,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="Kartes_terminu_ievade"/>
-
-                <TextBox x:Name="Kartes_CVC" MaxLength="3" HorizontalAlignment="Left" Height="23" Margin="628,434,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="Kartes_CVC_ievade"/>
-                <TextBox x:Name="Kartes_nummurs" MaxLength="19" HorizontalAlignment="Left" Height="23" Margin="518,402,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" PreviewTextInput="Kartes_nummuru_ievade"/>
-                <TextBox x:Name="Rezevetaja_Uzvards" HorizontalAlignment="Left" Height="23" Margin="355,402,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                
-                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="386,380,0,0" TextWrapping="Wrap" Text="Uzvārds" VerticalAlignment="Top" Height="22" Width="54"/>
-
-                <DatePicker x:Name="Sakum_datums" SelectedDateChanged="Sakum_Datumu_maina" DisplayDateStart="{x:Static sys:DateTime.Today}" HorizontalAlignment="Left" Margin="355,455,0,0" VerticalAlignment="Top" Width="120"/>
-                <DatePicker x:Name="Beigu_datums" SelectedDateChanged="Beigu_Datumu_maina" HorizontalAlignment="Left" Margin="355,501,0,0" VerticalAlignment="Top" Width="120"/>
-                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="386,433,0,0" TextWrapping="Wrap" Text="Sākums" VerticalAlignment="Top" Height="22" Width="54"/>
-                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="386,479,0,0" TextWrapping="Wrap" Text="Beigas" VerticalAlignment="Top" Height="22" Width="54"/>
-                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="780,434,0,0" TextWrapping="Wrap" Text="CVC2" VerticalAlignment="Top" Height="22" Width="54"/>
-                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="780,402,0,0" TextWrapping="Wrap" Text="Kartes nummurs" VerticalAlignment="Top" Height="22" Width="101"/>
-                <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="780,479,0,0" TextWrapping="Wrap" Text="Kartes termiņš" VerticalAlignment="Top" Height="22" Width="81"/>
-
-            </Grid>
-        </Grid>
-    </ScrollViewer>
+        </ScrollViewer>
     </Border>
 </Page>

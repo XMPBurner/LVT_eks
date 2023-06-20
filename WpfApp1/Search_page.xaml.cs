@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Text.RegularExpressions;
 using MySql.Data.MySqlClient;
 
@@ -31,6 +22,7 @@ namespace WpfApp1
         public int pilna_cena;
         public int User_ID;
         public int Izstaba_ID;
+        public string Skaits;
 
         string connstring = @"server=localhost;userid=root;password=;database=Porikis;port=3306";
         public Search_page(string email, string Vards, string Uzvards)
@@ -109,7 +101,7 @@ namespace WpfApp1
             MySqlConnection cnn;
             cnn = new MySqlConnection(connstring);
             String Valsts = Valsts_poga.Content.ToString();
-            String Skaits = Skaits_poga.Content.ToString();
+            Skaits = Skaits_poga.Content.ToString();
 
             int row = 0;
             int col = 0;
@@ -221,13 +213,14 @@ namespace WpfApp1
             string Valsts = buttonValues.Item1;
             string pil = buttonValues.Item2;
             string adr = buttonValues.Item3;
-            string rat = buttonValues.Item4;
-            int cen = buttonValues.Item5;
+            rat = buttonValues.Item4;
+            cen = buttonValues.Item5;
 
             R_Valsts.Text = "Valsts: " + Valsts;
             R_Pilseta.Text = "Pilsēta: " + pil;
             R_Adresse.Text = "Adresse: " + adr;
             R_Ratings.Text = "Ratings: " + rat;
+            R_Skaits.Text = "Skaits: " + Skaits;
             R_Cena.Text = "Cena: " + cen;
 
             Rezult_Grid.Visibility = Visibility.Hidden;
@@ -261,28 +254,28 @@ namespace WpfApp1
         {
             if (Sakum_datums.SelectedDate.HasValue && Beigu_datums.SelectedDate.HasValue)
             {
-                DateTime startDate = Sakum_datums.SelectedDate.Value;
-                DateTime endDate = Beigu_datums.SelectedDate.Value;
+                DateTime startDate = Sakum_datums.SelectedDate.Value; // Iegūst sākuma datumu no izvēlētās vērtības
+                DateTime endDate = Beigu_datums.SelectedDate.Value; // Iegūst beigu datumu no izvēlētās vērtības
 
-                // Aprēķina Cenu ar izvēlētām dienān
-                TimeSpan duration = endDate - startDate;
-                int numberOfDays = duration.Days;
-                pilna_cena = cen * numberOfDays;
+                // Aprēķina cenu ar izvēlētajām dienām
+                TimeSpan duration = endDate - startDate; // Aprēķina laiku starp beigu un sākuma datumu
+                int numberOfDays = duration.Days; // Iegūst dienu skaitu no aprēķinātā laika
+                pilna_cena = cen * numberOfDays; // Aprēķina kopējo cenu, reizinot dienu skaitu ar cenu vienai dienai
 
                 // Parāda kopējo cenu
-                R_Cena.Text = "Cena: " + pilna_cena;
+                R_Cena.Text = "Cena: " + pilna_cena; // Atjauno tekstu
             }
         }
-        private void Nummuru_ievade(object sender, TextCompositionEventArgs e)
+        private void Numuru_ievade(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
 
-        private void Kartes_nummuru_ievade(object sender, TextCompositionEventArgs e)
+        private void Kartes_numuru_ievade(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
+            e.Handled = regex.IsMatch(e.Text); // Atļauj tikai ciparu ievadi, ignorējot citus simbolus
 
             TextBox textBox = (TextBox)sender;
 
@@ -292,7 +285,7 @@ namespace WpfApp1
             // Izņem citas eksistējošās atstarpes
             string text = textBox.Text.Replace(" ", "");
 
-            // Ievieto atstarpi pēc katru ceturto nummuru
+            // Ievieto atstarpi pēc katras ceturto numura
             int spaceCount = text.Length / 4;
             for (int i = 1; i <= spaceCount; i++)
             {
@@ -300,7 +293,7 @@ namespace WpfApp1
                 text = text.Insert(insertPosition, " ");
             }
 
-            // Atjauno tekstu
+            // Atjauno tekstu ar ievietotajām atstarpēm
             textBox.Text = text;
 
             // Novieto Caret uz sākotnējo indeksu, kas pielāgots pievienotajām atstarpēm
@@ -311,7 +304,7 @@ namespace WpfApp1
         private void Kartes_CVC_ievade(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
+            e.Handled = regex.IsMatch(e.Text); // Atļauj tikai ciparu ievadi, ignorējot citus simbolus
         }
 
         private void Kartes_terminu_ievade(object sender, TextCompositionEventArgs e)
@@ -346,10 +339,10 @@ namespace WpfApp1
             int Nummurs_limits = 8;
             int Kartes_nummura_limits = 19;
             int Kartes_CVC_limits = 3;
-            int Kartes_termina_limits = 3;
+            int Kartes_termina_limits = 7;
 
-            TextBox[] rezervetie_dati = { Rezevetaja_Vards, Rezevetaja_Uzvards, Rezevetaja_Nummurs,
-                                  Rezevetaja_Epasts, Kartes_nummurs, Kartes_CVC, Kartes_datums };
+            TextBox[] rezervetie_dati = { Rezevetaja_Vards, Rezevetaja_Uzvards, Rezevetaja_Numurs,
+                                  Rezevetaja_Epasts, Kartes_numurs, Kartes_CVC, Kartes_datums };
             DatePicker[] rezervetie_datumi = { Sakum_datums, Beigu_datums };
 
             bool nav_ievadits = rezervetie_dati.Any(textBox => string.IsNullOrEmpty(textBox.Text))
@@ -361,8 +354,8 @@ namespace WpfApp1
                 return;
             }
 
-            if (Rezevetaja_Nummurs.Text.Length < Nummurs_limits ||
-                Kartes_nummurs.Text.Length < Kartes_nummura_limits ||
+            if (Rezevetaja_Numurs.Text.Length < Nummurs_limits ||
+                Kartes_numurs.Text.Length < Kartes_nummura_limits ||
                 Kartes_CVC.Text.Length < Kartes_CVC_limits ||
                 Kartes_datums.Text.Length < Kartes_termina_limits)
             {
@@ -372,12 +365,10 @@ namespace WpfApp1
 
             string Vards = Rezevetaja_Vards.Text;
             string Uzvards = Rezevetaja_Uzvards.Text;
-            string Nummurs = Rezevetaja_Nummurs.Text;
+            string Nummurs = Rezevetaja_Numurs.Text;
             string Epasts = Rezevetaja_Epasts.Text;
-            string Ratings = Rezevetaja_Epasts.Text;
-            int Cena = pilna_cena;
             DateTime sakums = Sakum_datums.SelectedDate.Value;
-            DateTime beigas = Sakum_datums.SelectedDate.Value;
+            DateTime beigas = Beigu_datums.SelectedDate.Value;
             long Sakum_rezervacijas_datums = new DateTimeOffset(sakums).ToUnixTimeSeconds();
             long Beig_rezervacijas_datums = new DateTimeOffset(beigas).ToUnixTimeSeconds();
 
@@ -398,30 +389,28 @@ namespace WpfApp1
                     }
                     else
                     {
-                        MessageBox.Show("Invalid user email. Cannot create reservation.");
+                        MessageBox.Show("Nevar atrast kontu. nevaram izveidot rezervāciju!");
                         return;
                     }
                 }
 
-                MySqlCommand izstabaCommand = new MySqlCommand("SELECT Izstaba_ID FROM Izstaba WHERE Cena = @Cena AND Ratings = @Ratings AND AC = @AC AND Wifi = @Wifi", cnn);
-                izstabaCommand.Parameters.AddWithValue("@Cena", 25);
-                izstabaCommand.Parameters.AddWithValue("@Ratings", 2);
-                izstabaCommand.Parameters.AddWithValue("@AC", true);
-                izstabaCommand.Parameters.AddWithValue("@Wifi", true);
+                MySqlCommand izstabaCommand = new MySqlCommand("SELECT Izstaba_ID FROM Izstaba WHERE Cena = @Cena AND Ratings = @Ratings", cnn);
+                izstabaCommand.Parameters.AddWithValue("@Cena", cen);
+                izstabaCommand.Parameters.AddWithValue("@Ratings", rat);
 
                 int Izstaba_ID = Convert.ToInt32(izstabaCommand.ExecuteScalar());
                 if (Izstaba_ID == 0)
                 {
-                    MessageBox.Show("No matching room found. Cannot create reservation.");
+                    MessageBox.Show("Nevarēja atrast telpu. Nevaram izveidot rezervāciju!");
                     return;
                 }
 
                 MySqlCommand insertCommand = new MySqlCommand("INSERT INTO Rezervacija (Check_in, Checkout, Izmaksa, Lietotajs_ID, Izstaba_ID) " +
                                                       "VALUES (@Check_in, @Checkout, @Izmaksa, @Lietotajs_ID, @Izstaba_ID)", cnn);
 
-                insertCommand.Parameters.Add("@Check_in", MySqlDbType.DateTime).Value = Sakum_rezervacijas_datums;
-                insertCommand.Parameters.Add("@Checkout", MySqlDbType.DateTime).Value = Beig_rezervacijas_datums;
-                insertCommand.Parameters.AddWithValue("@Izmaksa", Cena);
+                insertCommand.Parameters.Add("@Check_in", MySqlDbType.DateTime).Value = sakums;
+                insertCommand.Parameters.Add("@Checkout", MySqlDbType.DateTime).Value = beigas;
+                insertCommand.Parameters.AddWithValue("@Izmaksa", pilna_cena);
                 insertCommand.Parameters.AddWithValue("@Lietotajs_ID", User_ID);
                 insertCommand.Parameters.AddWithValue("@Izstaba_ID", Izstaba_ID);
 
@@ -433,27 +422,9 @@ namespace WpfApp1
                 }
                 else
                 {
-                    MessageBox.Show("Jūsu rezervacija Netika izveidota!");
+                    MessageBox.Show("Jūsu rezervaciju nevarēja izveidota!");
                 }
             }
         }
-
-        //  <Button HorizontalAlignment = "Left" VerticalAlignment="Top" Width="450" Height="250" Margin="507,25,0,0">
-        //      <StackPanel Height = "251" >
-        //          < Grid Width="450" Height="250">
-        //              <TextBlock HorizontalAlignment = "Right" Width="104" Margin="0,62,135,165">Valsts:"Nosaukums"</TextBlock>
-        //              <Image Source = "/Images/Room1.jpg" Stretch="Uniform"  Margin="0,0,244,3" />
-        //              <TextBlock HorizontalAlignment = "Right" Width="104" Margin="0,85,135,142"><Run Text = "Piseta" />< Run Text=":&quot;Nosaukums&quot;"/></TextBlock>
-        //              <TextBlock HorizontalAlignment = "Right" Width="115" Margin="0,108,124,119"><Run Text = "Adresse" />< Run Text=":&quot;Nosaukums&quot;"/></TextBlock>
-        //              <TextBlock HorizontalAlignment = "Right" Width="115" Margin="0,136,124,91"><Run Text = "Rating" />< Run Text="s: 5/5"/></TextBlock>
-        //              <TextBlock HorizontalAlignment = "Right" Width="104" Margin="0,164,135,63"><Run Text = "Cena" />< Run Text=":"/><Run Text = "40$" /></ TextBlock >
-
-        //              <Image Source="/Images/Wifi.png" Margin="211,192,209,28" Width="30" Height="30"/>
-        //              <Image Source = "/Images/AC.png" Margin="246,192,174,28" Width="30" Height="30"/>
-
-        //          </Grid>
-        //      </StackPanel>
-        //  </Button>
-
     }
 }

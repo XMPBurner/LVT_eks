@@ -17,12 +17,16 @@
                 <Button Content="Rezervācija" HorizontalAlignment="Left" Margin="231,133,0,0" VerticalAlignment="Top" Width="75" Click="DB_rezervacija"/>
 
                 <Grid x:Name="DB_Table" Margin="0,158,0,0">
-                    <DataGrid x:Name="Data_Table" AutoGenerateColumns="True" Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="139*"/>
+                        <ColumnDefinition Width="838*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="Data_Table" AutoGenerateColumns="True" Margin="10" Grid.ColumnSpan="2">
                         <DataGrid.Columns>
-                            <DataGridTemplateColumn Header="Delete">
+                            <DataGridTemplateColumn Header="Dzēst">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Content="Delete" Click="Delete_row"/>
+                                        <Button Content="Dzēst" Click="Delete_row"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
